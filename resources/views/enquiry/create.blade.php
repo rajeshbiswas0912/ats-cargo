@@ -1,15 +1,15 @@
-<x-app-layout title="Create Order">
+<x-guest-layout title="Create Enquiry">
   <div class="section__content section__content--p30">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <h3>Create Order</h3>
+            <h3>Create Enquiry</h3>
           </div>
         </div>
       </div>
       @include('layouts.includes.alerts')
-      <form action="{{ route('orders.store') }}" method="POST">
+      <form action="{{ route('enquiry.store') }}" method="POST">
         @csrf
         <div class="row">
           <div class="col-lg-12">
@@ -191,63 +191,63 @@
         let count = Number($(this).attr('data-count-row'));
         count++;
         let html = `<div class="row other_packages_${count}">
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="material_type[]"
-                          placeholder="Material type">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="material_type[]"
+                            placeholder="Material type">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="no_of_boxes[]"
+                            placeholder="No of boxes">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="weight[]"
+                            placeholder="Weight">
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="height[]"
+                            placeholder="Height">
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="length[]"
+                            placeholder="Length">
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="width[]"
+                            placeholder="Width">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <input type="text" class="form-control" name="amount[]"
+                            placeholder="Amount / Value">
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <select name="payment_type[]" class="form-control">
+                            <option value="0">Please select</option>
+                            <option value="prepaid">Prepaid</option>
+                            <option value="cod">Cash on delivery</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="no_of_boxes[]"
-                          placeholder="No of boxes">
+                    <div class="row mb-4 other_packages_${count}">
+                      <div class="col-lg-12 text-right">
+                        <button type="button" class="btn btn-danger remove_more_package" data-row-index="${count}">Remove</button>
                       </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="weight[]"
-                          placeholder="Weight">
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="height[]"
-                          placeholder="Height">
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="length[]"
-                          placeholder="Length">
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="width[]"
-                          placeholder="Width">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="amount[]"
-                          placeholder="Amount / Value">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <select name="payment_type[]" class="form-control">
-                          <option value="0">Please select</option>
-                          <option value="prepaid">Prepaid</option>
-                          <option value="cod">Cash on delivery</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row mb-4 other_packages_${count}">
-                    <div class="col-lg-12 text-right">
-                      <button type="button" class="btn btn-danger remove_more_package" data-row-index="${count}">Remove</button>
-                    </div>
-                  </div>`;
+                    </div>`;
 
         $('.packages').append(html);
         $(this).attr('data-count-row', count);
@@ -259,4 +259,4 @@
       });
     </script>
   @endpush
-</x-app-layout>
+</x-guest-layout>

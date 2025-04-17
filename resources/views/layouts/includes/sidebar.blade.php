@@ -16,7 +16,7 @@
             <i class="fas fa-tachometer-alt"></i>Orders</a>
         </li>
         <li>
-          <a href={{ route('enquiry.index') }}>
+          <a href={{ route('enquiries.index') }}>
             <i class="fas fa-tachometer-alt"></i>Enquiry</a>
         </li>
       </ul>

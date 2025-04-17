@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProfileController;
@@ -20,18 +21,24 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/enquiry', [EnquiryController::class, 'create'])->name('enquiry.create');
+Route::post('store-enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
 
 Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::prefix('orders')->name('orders.')->group(function () {
         Route::get('/', [OrdersController::class, 'index'])->name('index');
         Route::get('create', [OrdersController::class, 'create'])->name('create');
+        Route::get('/{tracking_no}', [OrdersController::class, 'show'])->name('show');
+        Route::post('store', [OrdersController::class, 'store'])->name('store');
+        Route::post('store-location/{order_id}', [OrdersController::class, 'store_location'])->name('store-location');
     });
 
-    Route::prefix('enquiry')->name('enquiry.')->group(function () {
+    Route::prefix('enquiries')->name('enquiries.')->group(function () {
         Route::get('/', [EnquiryController::class, 'index'])->name('index');
+        Route::get('details/{id}', [EnquiryController::class, 'details'])->name('details');
+        Route::post('create-order', [EnquiryController::class, 'create_order'])->name('create-order');
     });
 });
 

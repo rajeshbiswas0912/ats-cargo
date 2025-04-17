@@ -9,13 +9,37 @@
           </div>
         </div>
       </div>
+      @include('layouts.includes.alerts')
       <div class="row">
         <div class="col-lg-12">
           <div class="card border">
             <div class="card-body">
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.
-              </p>
+              <form action="">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="search" name="search"
+                        placeholder="Tracking No. / Customer Name / Customer Mobile" value="{{ request()->search }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="from_date" name="from_date" placeholder="From Date"
+                        readonly value="{{ request()->from_date }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="to_date" name="to_date" placeholder="To Date"
+                        readonly value="{{ request()->to_date }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <a href="{{ route('orders.index') }}" class="btn btn-danger">Reset</a>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -26,84 +50,56 @@
             <table class="table table-borderless table-striped table-earning">
               <thead>
                 <tr>
-                  <th>date</th>
-                  <th>order ID</th>
-                  <th>name</th>
-                  <th class="text-right">price</th>
-                  <th class="text-right">quantity</th>
-                  <th class="text-right">total</th>
+                  <th>Tracking Number</th>
+                  <th>Customer Name</th>
+                  <th>Mobile Number</th>
+                  <th>Weight</th>
+                  <th>Amount</th>
+                  <th>Date</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2018-09-29 05:57</td>
-                  <td>100398</td>
-                  <td>iPhone X 64Gb Grey</td>
-                  <td class="text-right">$999.00</td>
-                  <td class="text-right">1</td>
-                  <td class="text-right">$999.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-28 01:22</td>
-                  <td>100397</td>
-                  <td>Samsung S8 Black</td>
-                  <td class="text-right">$756.00</td>
-                  <td class="text-right">1</td>
-                  <td class="text-right">$756.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-27 02:12</td>
-                  <td>100396</td>
-                  <td>Game Console Controller</td>
-                  <td class="text-right">$22.00</td>
-                  <td class="text-right">2</td>
-                  <td class="text-right">$44.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-26 23:06</td>
-                  <td>100395</td>
-                  <td>iPhone X 256Gb Black</td>
-                  <td class="text-right">$1199.00</td>
-                  <td class="text-right">1</td>
-                  <td class="text-right">$1199.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-25 19:03</td>
-                  <td>100393</td>
-                  <td>USB 3.0 Cable</td>
-                  <td class="text-right">$10.00</td>
-                  <td class="text-right">3</td>
-                  <td class="text-right">$30.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-29 05:57</td>
-                  <td>100392</td>
-                  <td>Smartwatch 4.0 LTE Wifi</td>
-                  <td class="text-right">$199.00</td>
-                  <td class="text-right">6</td>
-                  <td class="text-right">$1494.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-24 19:10</td>
-                  <td>100391</td>
-                  <td>Camera C430W 4k</td>
-                  <td class="text-right">$699.00</td>
-                  <td class="text-right">1</td>
-                  <td class="text-right">$699.00</td>
-                </tr>
-                <tr>
-                  <td>2018-09-22 00:43</td>
-                  <td>100393</td>
-                  <td>USB 3.0 Cable</td>
-                  <td class="text-right">$10.00</td>
-                  <td class="text-right">3</td>
-                  <td class="text-right">$30.00</td>
-                </tr>
+                @if ($orders->isNotEmpty())
+                  @foreach ($orders as $order)
+                    <tr>
+                      <td><a href="{{ route('orders.show', $order->tracking_no) }}">{{ $order->tracking_no }}</a></td>
+                      <td>{{ $order->delivery_name }}</td>
+                      <td>{{ $order->delivery_mobile }}</td>
+                      <td>{{ $order->packages_sum_weight }}kg</td>
+                      <td>Rs.{{ number_format($order->packages_sum_amount, 2) }}/-</td>
+                      <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M Y') }}</td>
+                    </tr>
+                  @endforeach
+                @else
+                  <tr>
+                    <td colspan="6" class="text-center">No orders found</td>
+                  </tr>
+                @endif
               </tbody>
             </table>
+            @if ($orders->isNotEmpty())
+              <div class="mt-4 text-right">
+                {{ $orders->links('pagination::bootstrap-4') }}
+              </div>
+            @endif
           </div>
         </div>
       </div>
+
     </div>
   </div>
+
+  @push('scripts')
+    <script>
+      $(document).ready(function() {
+        $("#from_date, #to_date").datepicker({
+          changeMonth: true,
+          changeYear: true,
+          maxDate: new Date(),
+          minDate: new Date(2001, 0, 1),
+          yearRange: "2001:c"
+        });
+      });
+    </script>
+  @endpush
 </x-app-layout>

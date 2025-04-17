@@ -11,7 +11,7 @@
   <meta name="keywords" content="au theme template">
 
   <!-- Title Page-->
-  <title>Login</title>
+  <title>{{ $title }}</title>
 
   <!-- Fontfaces CSS-->
   <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="animsition">
+<body>
   <div class="page-wrapper">
     <div class="page-content--bge5">
       {{ $slot }}
@@ -63,6 +63,8 @@
 
   <!-- Main JS-->
   <script src="js/main.js"></script>
+
+  @stack('scripts')
 
 </body>
 
