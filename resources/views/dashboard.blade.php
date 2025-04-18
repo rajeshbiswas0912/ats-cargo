@@ -48,7 +48,8 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              Graph
+              <h4>Day Wise Orders</h4>
+              <canvas id="day_wise_graph"></canvas>
             </div>
           </div>
         </div>
@@ -91,4 +92,34 @@
 
     </div>
   </div>
+
+  @push('scripts')
+    <script>
+      $(document).ready(function() {
+        var ctx = document.getElementById("day_wise_graph");
+        if (ctx) {
+          ctx.height = 130;
+          var myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: {!! json_encode($datesValues) !!},
+              type: "line",
+              datasets: [{
+                data: {!! json_encode($dataCount) !!},
+                label: "{{ $current_month }}",
+                backgroundColor: "#2cadcf",
+              }, ],
+            },
+            options: {
+              maintainAspectRatio: true,
+              legend: {
+                display: true,
+              },
+              responsive: true,
+            },
+          });
+        }
+      });
+    </script>
+  @endpush
 </x-app-layout>

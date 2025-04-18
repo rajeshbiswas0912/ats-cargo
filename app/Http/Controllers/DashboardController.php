@@ -17,8 +17,28 @@ class DashboardController extends Controller
         $todaysOrders = Order::whereDate('created_at', Carbon::today())->count();
         $totalRevenue = OrderPackage::sum('amount');
         $todaysRevenue = OrderPackage::whereDate('created_at', Carbon::today())->sum('amount');
-
         $latestEnquirys = Enquiry::where('orderCreated', '0')->latest()->take(5)->get();
+
+        //Bar chart data
+        $current_month = Carbon::now()->format('F');
+        $startOfMonth = Carbon::now()->startOfMonth();
+        $endOfMonth = Carbon::now()->endOfMonth();
+
+        $rawData = Order::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->groupBy('date')
+            ->pluck('count', 'date');
+
+        // Step 3: Generate all dates of the month with default 0
+        $currentDate = $startOfMonth->copy();
+        $datesValues = $dataCount = [];
+
+        while ($currentDate <= $endOfMonth) {
+            $dateString = $currentDate->toDateString();
+            $datesValues[] = Carbon::parse($dateString)->format('d');
+            $dataCount[] = $rawData[$dateString] ?? 0;
+            $currentDate->addDay();
+        }
 
         return view('dashboard', [
             'totalOrders' => $totalOrders,
@@ -26,7 +46,10 @@ class DashboardController extends Controller
             'todaysOrders' => $todaysOrders,
             'totalRevenue' => $totalRevenue,
             'todaysRevenue' => $todaysRevenue,
-            'latestEnquirys' => $latestEnquirys
+            'latestEnquirys' => $latestEnquirys,
+            'current_month' => $current_month,
+            'datesValues' => $datesValues,
+            'dataCount' => $dataCount
         ]);
     }
 }
