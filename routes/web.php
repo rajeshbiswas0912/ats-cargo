@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [OrdersController::class, 'index'])->name('index');
         Route::get('create', [OrdersController::class, 'create'])->name('create');
         Route::get('/{tracking_no}', [OrdersController::class, 'show'])->name('show');
+        Route::get('delete/{order_id}', [OrdersController::class, 'delete'])->name('delete');
         Route::post('store', [OrdersController::class, 'store'])->name('store');
         Route::post('store-location/{order_id}', [OrdersController::class, 'store_location'])->name('store-location');
     });

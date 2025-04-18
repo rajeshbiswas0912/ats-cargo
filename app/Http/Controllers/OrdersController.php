@@ -204,4 +204,19 @@ class OrdersController extends Controller
             return redirect()->back()->with('error', $th->getMessage())->withInput();
         }
     }
+
+    public function delete($order_id)
+    {
+        try {
+            DB::beginTransaction();
+            Order::find($order_id)->delete();
+            OrderPackage::where('order_id', $order_id)->delete();
+            OrderTracking::where('order_id', $order_id)->delete();
+            DB::commit();
+            return redirect()->route('orders.index')->with('success', 'Order deleted successfully.');
+        } catch (Exception $th) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
+        }
+    }
 }

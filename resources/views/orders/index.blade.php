@@ -56,6 +56,8 @@
                   <th>Weight</th>
                   <th>Amount</th>
                   <th>Date</th>
+                  <th>Is Delivered</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,6 +70,13 @@
                       <td>{{ $order->packages_sum_weight }}kg</td>
                       <td>Rs.{{ number_format($order->packages_sum_amount, 2) }}/-</td>
                       <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M Y') }}</td>
+                      <td class="{{ $order->isDelivered === '1' ? 'text-success' : 'text-danger' }}">
+                        {{ $order->isDelivered === '1' ? 'Yes' : 'No' }}</td>
+                      <td>
+                        <a href="{{ route('orders.delete', $order->id) }}" class="text-danger" title="Delete"
+                          onclick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash"
+                            aria-hidden="true"></i></a>
+                      </td>
                     </tr>
                   @endforeach
                 @else

@@ -27,19 +27,19 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="p_pincode" name="p_pincode"
+                      <input type="number" class="form-control" id="p_pincode" name="p_pincode"
                         value="{{ old('p_pincode') }}" placeholder="Pincode">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="p_source_pincode" name="p_source_pincode"
+                      <input type="number" class="form-control" id="p_source_pincode" name="p_source_pincode"
                         value="{{ old('p_source_pincode') }}" placeholder="Source Pincode">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="p_mobile" name="p_mobile"
+                      <input type="number" class="form-control" id="p_mobile" name="p_mobile"
                         value="{{ old('p_mobile') }}" placeholder="Mobile Number">
                     </div>
                   </div>
@@ -71,19 +71,19 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="d_pincode" name="d_pincode"
+                      <input type="number" class="form-control" id="d_pincode" name="d_pincode"
                         value="{{ old('d_pincode') }}" placeholder="Pincode">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="d_source_pincode" name="d_source_pincode"
+                      <input type="number" class="form-control" id="d_source_pincode" name="d_source_pincode"
                         value="{{ old('d_source_pincode') }}" placeholder="Source Pincode">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="text" class="form-control" id="d_mobile" name="d_mobile"
+                      <input type="number" class="form-control" id="d_mobile" name="d_mobile"
                         value="{{ old('d_mobile') }}" placeholder="Mobile Number">
                     </div>
                   </div>
@@ -116,37 +116,37 @@
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="no_of_boxes" name="no_of_boxes[]"
+                        <input type="number" class="form-control" id="no_of_boxes" name="no_of_boxes[]"
                           placeholder="No of boxes">
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="weight" name="weight[]"
+                        <input type="number" class="form-control" id="weight" name="weight[]"
                           placeholder="Weight">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="height" name="height[]"
+                        <input type="number" class="form-control" id="height" name="height[]"
                           placeholder="Height">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="length" name="length[]"
+                        <input type="number" class="form-control" id="length" name="length[]"
                           placeholder="Length">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="width" name="width[]"
+                        <input type="number" class="form-control" id="width" name="width[]"
                           placeholder="Width">
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <input type="text" class="form-control" id="amount" name="amount[]"
+                        <input type="number" class="form-control" id="amount" name="amount[]"
                           placeholder="Amount / Value">
                       </div>
                     </div>
