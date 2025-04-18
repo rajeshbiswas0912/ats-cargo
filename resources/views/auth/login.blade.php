@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Login">
   <div class="container">
     <div class="login-wrap">
       <div class="login-content">
