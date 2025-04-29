@@ -31,12 +31,6 @@
                 </div>
                 <div class="col-lg-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="p_source_pincode" name="p_source_pincode"
-                      value="{{ $enquiry->pickup_source_pincode }}" placeholder="Source Pincode" readonly>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="p_mobile" name="p_mobile"
                       value="{{ $enquiry->pickup_mobile }}" placeholder="Mobile Number" readonly>
                   </div>
@@ -71,12 +65,6 @@
                   <div class="form-group">
                     <input type="text" class="form-control" id="d_pincode" name="d_pincode"
                       value="{{ $enquiry->delivery_pincode }}" placeholder="Pincode" readonly>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="d_source_pincode" name="d_source_pincode"
-                      value="{{ $enquiry->delivery_source_pincode }}" placeholder="Source Pincode" readonly>
                   </div>
                 </div>
                 <div class="col-lg-3">
@@ -166,6 +154,36 @@
                     </div>
                   @endforeach
                 @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card border">
+            <div class="card-header">
+              <h4>Price & Payment Type</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="amount" name="amount[]"
+                      placeholder="Amount / Value" value="{{ $enquiry->total_amount }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select name="payment_type[]" id="payment_type" class="form-control" disabled readonly>
+                      <option value="prepaid" {{ $enquiry->payment_type == 'prepaid' ? 'selected' : null }}>
+                        Prepaid</option>
+                      <option value="cod" {{ $enquiry->payment_type == 'cod' ? 'selected' : null }}>Cash on
+                        delivery</option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

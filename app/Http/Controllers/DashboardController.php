@@ -15,8 +15,8 @@ class DashboardController extends Controller
         $totalOrders = Order::count();
         $totalDelivered = Order::where('isDelivered', "1")->count();
         $todaysOrders = Order::whereDate('created_at', Carbon::today())->count();
-        $totalRevenue = OrderPackage::sum('amount');
-        $todaysRevenue = OrderPackage::whereDate('created_at', Carbon::today())->sum('amount');
+        $totalRevenue = Order::sum('total_amount');
+        $todaysRevenue = Order::whereDate('created_at', Carbon::today())->sum('total_amount');
         $latestEnquirys = Enquiry::where('orderCreated', '0')->latest()->take(5)->get();
 
         //Bar chart data
