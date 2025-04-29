@@ -68,7 +68,7 @@
                       <td>{{ $order->delivery_name }}</td>
                       <td>{{ $order->delivery_mobile }}</td>
                       <td>{{ $order->packages_sum_weight }}kg</td>
-                      <td>Rs.{{ number_format($order->packages_sum_amount, 2) }}/-</td>
+                      <td>Rs.{{ number_format($order->total_amount, 2) }}/-</td>
                       <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M Y') }}</td>
                       <td class="{{ $order->isDelivered === '1' ? 'text-success' : 'text-danger' }}">
                         {{ $order->isDelivered === '1' ? 'Yes' : 'No' }}</td>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -25,11 +26,19 @@ class Order extends Model
 
     protected static function generateTrackingId()
     {
-        $prefix = 'ORD';
-        $timestamp = now()->format('YmdHis');
-        $random = Str::upper(Str::random(6));
+        $nextNumber = DB::transaction(function () {
+            $sequence = DB::table('tracking_sequences')->lockForUpdate()->first();
+            $next = $sequence->last_number + 1;
 
-        return $prefix . '-' . $timestamp . '-' . $random;
+            if ($next > 9999999) {
+                throw new \Exception("Tracking number limit reached");
+            }
+
+            DB::table('tracking_sequences')->update(['last_number' => $next]);
+            return $next;
+        });
+
+        return str_pad($nextNumber, 7, '0', STR_PAD_LEFT);
     }
 
     public function packages()

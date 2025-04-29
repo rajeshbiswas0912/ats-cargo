@@ -129,34 +129,19 @@
                     <div class="col-lg-2">
                       <div class="form-group">
                         <input type="number" class="form-control" id="height" name="height[]"
-                          placeholder="Height">
+                          placeholder="Height (cm)">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
                         <input type="number" class="form-control" id="length" name="length[]"
-                          placeholder="Length">
+                          placeholder="Length (cm)">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
                         <input type="number" class="form-control" id="width" name="width[]"
-                          placeholder="Width">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <input type="number" class="form-control" id="amount" name="amount[]"
-                          placeholder="Amount / Value">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <select name="payment_type[]" id="payment_type" class="form-control">
-                          <option value="0">Please select</option>
-                          <option value="prepaid">Prepaid</option>
-                          <option value="cod">Cash on delivery</option>
-                        </select>
+                          placeholder="Width (cm)">
                       </div>
                     </div>
                   </div>
@@ -164,6 +149,35 @@
                     <div class="col-lg-12 text-right">
                       <button type="button" class="btn btn-primary add_more_package" data-count-row="1">Add one
                         more</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card border">
+              <div class="card-header">
+                <h4>Price & Payment Type</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="price" name="price" placeholder="Price"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="payment_type" id="payment_type" class="form-control" required>
+                        <option value="0">Please select</option>
+                        <option value="prepaid">Prepaid</option>
+                        <option value="cod">Cash on delivery</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -199,47 +213,32 @@
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="no_of_boxes[]"
+                        <input type="number" class="form-control" name="no_of_boxes[]"
                           placeholder="No of boxes">
                       </div>
                     </div>
                     <div class="col-lg-3">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="weight[]"
+                        <input type="number" class="form-control" name="weight[]"
                           placeholder="Weight">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="height[]"
-                          placeholder="Height">
+                        <input type="number" class="form-control" name="height[]"
+                          placeholder="Height (cm)">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="length[]"
-                          placeholder="Length">
+                        <input type="number" class="form-control" name="length[]"
+                          placeholder="Length (cm)">
                       </div>
                     </div>
                     <div class="col-lg-2">
                       <div class="form-group">
-                        <input type="text" class="form-control" name="width[]"
-                          placeholder="Width">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="amount[]"
-                          placeholder="Amount / Value">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <select name="payment_type[]" class="form-control">
-                          <option value="0">Please select</option>
-                          <option value="prepaid">Prepaid</option>
-                          <option value="cod">Cash on delivery</option>
-                        </select>
+                        <input type="number" class="form-control" name="width[]"
+                          placeholder="Width (cm)">
                       </div>
                     </div>
                   </div>

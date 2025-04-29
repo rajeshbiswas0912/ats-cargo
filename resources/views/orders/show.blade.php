@@ -1,5 +1,5 @@
 <x-app-layout title="Show Order">
-  <div class="section__content section__content--p30">
+  <div class="section__content section__content--p30 order-details">
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
@@ -162,25 +162,40 @@
                             placeholder="Width" value="{{ $package->weight }}" readonly>
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="amount" name="amount[]"
-                            placeholder="Amount / Value" value="{{ $package->amount }}" readonly>
-                        </div>
-                      </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <select name="payment_type[]" id="payment_type" class="form-control" disabled readonly>
-                            <option value="prepaid" {{ $package->payment_type == 'prepaid' ? 'selected' : null }}>
-                              Prepaid</option>
-                            <option value="cod" {{ $package->payment_type == 'cod' ? 'selected' : null }}>Cash on
-                              delivery</option>
-                          </select>
-                        </div>
-                      </div>
                     </div>
                   @endforeach
                 @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card border">
+            <div class="card-header">
+              <h4>Price & Payment Type</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="price" name="price" placeholder="Price"
+                      value="{{ $order->total_amount }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <select name="payment_type" id="payment_type" class="form-control" disabled>
+                      <option value="0">Please select</option>
+                      <option value="prepaid" {{ $order->payment_type == 'prepaid' ? 'selected' : null }}>Prepaid
+                      </option>
+                      <option value="cod" {{ $order->payment_type == 'cod' ? 'selected' : null }}>Cash on delivery
+                      </option>
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

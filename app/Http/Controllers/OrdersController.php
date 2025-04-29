@@ -15,7 +15,7 @@ class OrdersController extends Controller
     public function index(Request $request)
     {
         $orders = Order::withSum('packages', 'weight')
-            ->withSum('packages', 'amount')
+            ->orderBy('created_at', 'desc')
             ->when($request->search, function ($q) use ($request) {
                 $q->where('tracking_no', 'like', '%' . $request->search . '%')
                     ->orWhere('delivery_name', 'like', '%' . $request->search . '%')
@@ -29,7 +29,6 @@ class OrdersController extends Controller
                 $to_date = Carbon::parse($request->to_date)->format('Y-m-d');
                 $q->whereDate('created_at', '<=', $to_date);
             })
-            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('orders.index', ['orders' => $orders]);
@@ -58,6 +57,10 @@ class OrdersController extends Controller
                 'd_mobile' => 'required|digits_between:10,15',
                 'd_address' => 'required|string',
 
+                //Price & Payment Details
+                'payment_type' => 'required|string|in:prepaid,cod',
+                'price' => 'required|numeric|min:0',
+
                 // Array Fields
                 'material_type' => 'required|array',
                 'material_type.*' => 'required|string',
@@ -76,12 +79,6 @@ class OrdersController extends Controller
 
                 'width' => 'required|array',
                 'width.*' => 'required',
-
-                'amount' => 'required|array',
-                'amount.*' => 'required|numeric|min:0',
-
-                'payment_type' => 'required|array',
-                'payment_type.*' => 'required|string|in:prepaid,cod', // modify as per your allowed types
             ], [
                 // Custom Messages
 
@@ -124,15 +121,6 @@ class OrdersController extends Controller
 
                 'width.required' => 'Width is required.',
                 'width.*.required' => 'Each width is required.',
-
-                'amount.required' => 'Amount is required.',
-                'amount.*.required' => 'Each amount is required.',
-                'amount.*.numeric' => 'Each amount must be numeric.',
-                'amount.*.min' => 'Each amount must be at least 0.',
-
-                'payment_type.required' => 'Payment type is required.',
-                'payment_type.*.required' => 'Each payment type is required.',
-                'payment_type.*.in' => 'Payment type must be either prepaid or cod.',
             ]);
 
             DB::beginTransaction();
@@ -148,6 +136,8 @@ class OrdersController extends Controller
                 'delivery_source_pincode' => $validated['d_source_pincode'],
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
+                'total_amount' => $validated['price'],
+                'payment_type' => $validated['payment_type']
             ]);
 
             $count = count($validated['material_type']);
@@ -159,9 +149,7 @@ class OrdersController extends Controller
                     'weight' => $validated['weight'][$i],
                     'height' => $validated['height'][$i],
                     'length' => $validated['length'][$i],
-                    'width' => $validated['width'][$i],
-                    'amount' => $validated['amount'][$i],
-                    'payment_type' => $validated['payment_type'][$i],
+                    'width' => $validated['width'][$i]
                 ]);
             }
 
