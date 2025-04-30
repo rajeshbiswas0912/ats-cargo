@@ -46,14 +46,12 @@ class OrdersController extends Controller
                 // Sender Details
                 'p_name' => 'required|string|max:255',
                 'p_pincode' => 'required|digits:6',
-                'p_source_pincode' => 'required',
                 'p_mobile' => 'required|digits_between:10,15',
                 'p_address' => 'required|string',
 
                 // Receiver Details
                 'd_name' => 'required|string|max:255',
                 'd_pincode' => 'required|digits:6',
-                'd_source_pincode' => 'required',
                 'd_mobile' => 'required|digits_between:10,15',
                 'd_address' => 'required|string',
 
@@ -89,7 +87,6 @@ class OrdersController extends Controller
                 'p_mobile.required' => 'Pickup mobile number is required.',
                 'p_mobile.digits_between' => 'Pickup mobile number must be between 10 and 15 digits.',
                 'p_address.required' => 'Pickup address is required.',
-                'p_source_pincode.required' => 'Pickup source pincode is required.',
 
                 // Receiver
                 'd_name.required' => 'Delivery name is required.',
@@ -98,7 +95,6 @@ class OrdersController extends Controller
                 'd_mobile.required' => 'Delivery mobile number is required.',
                 'd_mobile.digits_between' => 'Delivery mobile number must be between 10 and 15 digits.',
                 'd_address.required' => 'Delivery address is required.',
-                'd_source_pincode.required' => 'Delivery source pincode is required.',
 
                 // Array fields
                 'material_type.required' => 'Material type is required.',
@@ -128,12 +124,10 @@ class OrdersController extends Controller
             $order = Order::create([
                 'pickup_name' => $validated['p_name'],
                 'pickup_pincode' => $validated['p_pincode'],
-                'pickup_source_pincode' => $validated['p_source_pincode'],
                 'pickup_mobile' => $validated['p_mobile'],
                 'pickup_address' => $validated['p_address'],
                 'delivery_name' => $validated['d_name'],
                 'delivery_pincode' => $validated['d_pincode'],
-                'delivery_source_pincode' => $validated['d_source_pincode'],
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
                 'total_amount' => $validated['price'],

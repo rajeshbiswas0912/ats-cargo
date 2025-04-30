@@ -180,14 +180,14 @@ class EnquiryController extends Controller
             $order = Order::create([
                 'pickup_name' => $enquiry->pickup_name,
                 'pickup_pincode' => $enquiry->pickup_pincode,
-                'pickup_source_pincode' => $enquiry->pickup_source_pincode,
                 'pickup_mobile' => $enquiry->pickup_mobile,
                 'pickup_address' => $enquiry->pickup_address,
                 'delivery_name' => $enquiry->delivery_name,
                 'delivery_pincode' => $enquiry->delivery_pincode,
-                'delivery_source_pincode' => $enquiry->delivery_source_pincode,
                 'delivery_mobile' => $enquiry->delivery_mobile,
                 'delivery_address' => $enquiry->delivery_address,
+                'total_amount' => $enquiry->total_amount,
+                'payment_type' => $enquiry->payment_type
             ]);
 
             foreach ($enquiry->packages as $package) {
@@ -198,9 +198,7 @@ class EnquiryController extends Controller
                     'weight' => $package->weight,
                     'height' => $package->height,
                     'length' => $package->length,
-                    'width' => $package->width,
-                    'amount' => $package->amount,
-                    'payment_type' => $package->payment_type,
+                    'width' => $package->width
                 ]);
             }
 

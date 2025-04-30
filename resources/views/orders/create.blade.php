@@ -33,12 +33,6 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="number" class="form-control" id="p_source_pincode" name="p_source_pincode"
-                        value="{{ old('p_source_pincode') }}" placeholder="Source Pincode">
-                    </div>
-                  </div>
-                  <div class="col-lg-3">
-                    <div class="form-group">
                       <input type="number" class="form-control" id="p_mobile" name="p_mobile"
                         value="{{ old('p_mobile') }}" placeholder="Mobile Number">
                     </div>
@@ -73,12 +67,6 @@
                     <div class="form-group">
                       <input type="number" class="form-control" id="d_pincode" name="d_pincode"
                         value="{{ old('d_pincode') }}" placeholder="Pincode">
-                    </div>
-                  </div>
-                  <div class="col-lg-3">
-                    <div class="form-group">
-                      <input type="number" class="form-control" id="d_source_pincode" name="d_source_pincode"
-                        value="{{ old('d_source_pincode') }}" placeholder="Source Pincode">
                     </div>
                   </div>
                   <div class="col-lg-3">

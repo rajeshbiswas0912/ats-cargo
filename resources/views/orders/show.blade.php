@@ -46,12 +46,6 @@
                 </div>
                 <div class="col-lg-3">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="p_source_pincode" name="p_source_pincode"
-                      value="{{ $order->pickup_source_pincode }}" placeholder="Source Pincode" readonly>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
                     <input type="text" class="form-control" id="p_mobile" name="p_mobile"
                       value="{{ $order->pickup_mobile }}" placeholder="Mobile Number" readonly>
                   </div>
@@ -86,12 +80,6 @@
                   <div class="form-group">
                     <input type="text" class="form-control" id="d_pincode" name="d_pincode"
                       value="{{ $order->delivery_pincode }}" placeholder="Pincode" readonly>
-                  </div>
-                </div>
-                <div class="col-lg-3">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="d_source_pincode" name="d_source_pincode"
-                      value="{{ $order->delivery_source_pincode }}" placeholder="Source Pincode" readonly>
                   </div>
                 </div>
                 <div class="col-lg-3">

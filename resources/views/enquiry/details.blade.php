@@ -198,8 +198,7 @@
               <input type="hidden" name="enquiry_id" value="{{ $enquiry->id }}">
               <button type="submit" class="btn btn-primary"
                 onclick="return confirm('Are you sure you want to convert this enquiry to order?')">Convert this
-                enquiry
-                to order</button>
+                enquiry to order</button>
             </form>
           </div>
         </div>
