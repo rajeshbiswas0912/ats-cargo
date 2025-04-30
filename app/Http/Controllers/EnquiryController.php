@@ -218,4 +218,15 @@ class EnquiryController extends Controller
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
+
+    public function tracking(Request $request)
+    {
+        $order = Order::with('tracking', 'packages')->where([
+            'tracking_no' => $request->tracking_no
+        ])->first();
+
+        return view('enquiry.tracking', [
+            'order' => $order
+        ]);
+    }
 }

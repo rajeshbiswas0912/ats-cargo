@@ -22,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/enquiry', [EnquiryController::class, 'create'])->name('enquiry.create');
+Route::get('/tracking', [EnquiryController::class, 'tracking'])->name('enquiry.tracking');
 Route::post('store-enquiry', [EnquiryController::class, 'store'])->name('enquiry.store');
 
 Route::middleware('auth')->group(function () {
