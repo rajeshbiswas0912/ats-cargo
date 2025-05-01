@@ -4,7 +4,7 @@
 
 <aside class="menu-sidebar d-none d-lg-block">
   <div class="logo">
-    <a href="#">
+    <a href="/dashboard">
       <img src="images/logo.png" alt="ATS Cargo" />
     </a>
   </div>

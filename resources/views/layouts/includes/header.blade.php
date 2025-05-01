@@ -16,13 +16,13 @@
               <div class="account-dropdown js-dropdown">
                 <div class="info clearfix">
                   <div class="image">
-                    <a href="#">
+                    <a href="/dashboard">
                       <img src="images/no-image.png" alt="John Doe" />
                     </a>
                   </div>
                   <div class="content">
                     <h5 class="name">
-                      <a href="#">ATS Cargo</a>
+                      <a href="/dashboard">ATS Cargo</a>
                     </h5>
                     {{-- <span class="email">ATS Cargo</span> --}}
                   </div>
