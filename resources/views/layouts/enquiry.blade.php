@@ -33,14 +33,15 @@
         </div>
       </div>
       <div class="text-end mt-3 mt-md-0">
-        <div><strong>Call:</strong> +91-9876543210</div>
-        <div><strong>Email:</strong> support@atscourier.com</div>
+        <div><strong>Call:</strong> +91-8436366904 / +91-8537828889</div>
+        <div><strong>Email:</strong> atscouirercargos@gmail.com</div>
       </div>
     </div>
   </header>
 
   {{ $slot }}
 
+  <script src="vendor/jquery-3.2.1.min.js"></script>
   <!-- Bootstrap & JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
