@@ -26,19 +26,15 @@ class Order extends Model
 
     protected static function generateTrackingId()
     {
-        $nextNumber = DB::transaction(function () {
-            $sequence = DB::table('tracking_sequences')->lockForUpdate()->first();
-            $next = $sequence->last_number + 1;
+        $lastOrderId = self::max('id') + 1;
 
-            if ($next > 9999999) {
-                throw new \Exception("Tracking number limit reached");
-            }
+        $digits = 7 - strlen($lastOrderId);
+        if ($digits <= 0) {
+            throw new \Exception("Order ID is too long to generate tracking ID");
+        }
 
-            DB::table('tracking_sequences')->update(['last_number' => $next]);
-            return $next;
-        });
-
-        return str_pad($nextNumber, 7, '0', STR_PAD_LEFT);
+        $randomPart = str_pad(mt_rand(0, pow(10, $digits) - 1), $digits, '0', STR_PAD_LEFT);
+        return $lastOrderId . $randomPart;
     }
 
     public function packages()

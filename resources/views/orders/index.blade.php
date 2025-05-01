@@ -73,6 +73,8 @@
                       <td class="{{ $order->isDelivered === '1' ? 'text-success' : 'text-danger' }}">
                         {{ $order->isDelivered === '1' ? 'Yes' : 'No' }}</td>
                       <td>
+                        <a href="{{ route('orders.edit', $order->id) }}" class="text-primary" title="Edit"><i
+                            class="fa fa-edit" aria-hidden="true"></i></a>
                         <a href="{{ route('orders.delete', $order->id) }}" class="text-danger" title="Delete"
                           onclick="return confirm('Are you sure you want to delete?')"><i class="fa fa-trash"
                             aria-hidden="true"></i></a>
