@@ -135,22 +135,6 @@
                             placeholder="Width" value="{{ $package->weight }}" readonly>
                         </div>
                       </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <input type="text" class="form-control" id="amount" name="amount[]"
-                            placeholder="Amount / Value" value="{{ $package->amount }}" readonly>
-                        </div>
-                      </div>
-                      <div class="col-lg-3">
-                        <div class="form-group">
-                          <select name="payment_type[]" id="payment_type" class="form-control" disabled readonly>
-                            <option value="prepaid" {{ $package->payment_type == 'prepaid' ? 'selected' : null }}>
-                              Prepaid</option>
-                            <option value="cod" {{ $package->payment_type == 'cod' ? 'selected' : null }}>Cash on
-                              delivery</option>
-                          </select>
-                        </div>
-                      </div>
                     </div>
                   @endforeach
                 @endif
