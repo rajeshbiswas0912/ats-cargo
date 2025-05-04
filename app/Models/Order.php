@@ -26,15 +26,17 @@ class Order extends Model
 
     protected static function generateTrackingId()
     {
-        $lastOrderId = self::max('id') + 1;
+        $lastOrderId = self::max('tracking_no');
 
-        $digits = 7 - strlen($lastOrderId);
+        // Ensure minimum starting point
+        $nextOrderId = $lastOrderId ? $lastOrderId + 1 : 1000001;
+
+        $digits = 8 - strlen($nextOrderId);
         if ($digits <= 0) {
             throw new \Exception("Order ID is too long to generate tracking ID");
         }
 
-        $randomPart = str_pad(mt_rand(0, pow(10, $digits) - 1), $digits, '0', STR_PAD_LEFT);
-        return $lastOrderId . $randomPart;
+        return $nextOrderId;
     }
 
     public function packages()

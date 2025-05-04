@@ -336,4 +336,12 @@ class OrdersController extends Controller
             return redirect()->back()->with('error', $th->getMessage())->withInput();
         }
     }
+
+    public function delivered(Request $request, Order $order)
+    {
+        $order->isDelivered = $request->is_delivered;
+        $order->save();
+
+        return redirect()->back()->with('success', 'Order status has been updated successfully.');
+    }
 }

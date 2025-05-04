@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::post('store', [OrdersController::class, 'store'])->name('store');
         Route::post('store-location/{order_id}', [OrdersController::class, 'store_location'])->name('store-location');
         Route::post('update/{order}', [OrdersController::class, 'update'])->name('update');
+        Route::post('delivered/{order}', [OrdersController::class, 'delivered'])->name('delivered');
     });
 
     Route::prefix('enquiries')->name('enquiries.')->group(function () {

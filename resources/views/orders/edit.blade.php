@@ -5,6 +5,17 @@
         <div class="col-lg-12">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h3>Edit Order</h3>
+            <div>
+              <form action="{{ route('orders.delivered', $order->id) }}" method="POST">
+                @csrf
+                <label for="" class="form-label">Is Delivered?</label>
+                <select name="is_delivered" id="" class="form-select" required>
+                  <option value="0" {{ $order->isDelivered == '0' ? 'selected' : null }}>No</option>
+                  <option value="1" {{ $order->isDelivered == '1' ? 'selected' : null }}>Yes</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
