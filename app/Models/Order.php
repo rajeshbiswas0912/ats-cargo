@@ -26,7 +26,7 @@ class Order extends Model
 
     protected static function generateTrackingId()
     {
-        $lastOrderId = self::max('tracking_no');
+        $lastOrderId = self::withTrashed()->max('tracking_no');
 
         // Ensure minimum starting point
         $nextOrderId = $lastOrderId ? $lastOrderId + 1 : 1000001;
