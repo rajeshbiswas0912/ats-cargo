@@ -176,6 +176,60 @@
 
         <div class="row">
           <div class="col-lg-12">
+            <div class="card border">
+              <div class="card-header">
+                <h4>Shipping Details</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="shipping_charge" name="shipping_charge"
+                        placeholder="Shipping Price">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="pickup_charge" name="pickup_charge"
+                        placeholder="Pickup Charge">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="hamali" name="hamali"
+                        placeholder="Hamali">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="sc_cost" name="sc_cost" placeholder="S/C">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="st_charge" name="st_charge"
+                        placeholder="ST. Charge">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="delivery_charge" name="delivery_charge"
+                        placeholder="Delivery Charge">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="igst" name="igst" placeholder="IGST">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
         </div>

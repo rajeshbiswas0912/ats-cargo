@@ -24,6 +24,20 @@
         </div>
       </div>
       @include('layouts.includes.alerts')
+
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <div class="text-right">
+            <a href="{{ route('download-receipt', ['id' => $order->id, 'type' => 'CONSIGNOR']) }}"
+              class="btn btn-primary">Consignor</a>
+            <a href="{{ route('download-receipt', ['id' => $order->id, 'type' => 'CONSIGNEE']) }}"
+              class="btn btn-primary">Consignee</a>
+            <a href="{{ route('download-receipt', ['id' => $order->id, 'type' => 'DESTINATION']) }}"
+              class="btn btn-primary">Destination</a>
+          </div>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-lg-12">
           <div class="card border">
@@ -182,6 +196,62 @@
                       <option value="cod" {{ $order->payment_type == 'cod' ? 'selected' : null }}>Cash on delivery
                       </option>
                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card border">
+            <div class="card-header">
+              <h4>Shipping Details</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="shipping_charge" name="shipping_charge"
+                      placeholder="Shipping Price" value="{{ $order->shipping_charge }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="pickup_charge" name="pickup_charge"
+                      placeholder="Pickup Charge" value="{{ $order->pickup_charge }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="hamali" name="hamali" placeholder="Hamali"
+                      value="{{ $order->hamali }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="sc_cost" name="sc_cost" placeholder="S/C"
+                      value="{{ $order->sc_cost }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="st_charge" name="st_charge"
+                      placeholder="ST. Charge" value="{{ $order->st_charge }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="delivery_charge" name="delivery_charge"
+                      placeholder="Delivery Charge" value="{{ $order->delivery_charge }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <input type="number" class="form-control" id="igst" name="igst" placeholder="IGST"
+                      value="{{ $order->igst }}" readonly>
                   </div>
                 </div>
               </div>

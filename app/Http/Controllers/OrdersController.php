@@ -131,7 +131,14 @@ class OrdersController extends Controller
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
                 'total_amount' => $validated['price'],
-                'payment_type' => $validated['payment_type']
+                'payment_type' => $validated['payment_type'],
+                'shipping_charge' => $request->shipping_charge,
+                'pickup_charge' => $request->pickup_charge,
+                'hamali' => $request->hamali,
+                'sc_cost' => $request->sc_cost,
+                'st_charge' => $request->st_charge,
+                'delivery_charge' => $request->delivery_charge,
+                'igst' => $request->igst
             ]);
 
             $count = count($validated['material_type']);
@@ -306,7 +313,14 @@ class OrdersController extends Controller
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
                 'total_amount' => $validated['price'],
-                'payment_type' => $validated['payment_type']
+                'payment_type' => $validated['payment_type'],
+                'shipping_charge' => $request->shipping_charge,
+                'pickup_charge' => $request->pickup_charge,
+                'hamali' => $request->hamali,
+                'sc_cost' => $request->sc_cost,
+                'st_charge' => $request->st_charge,
+                'delivery_charge' => $request->delivery_charge,
+                'igst' => $request->igst
             ]);
 
             OrderPackage::where('order_id', $order->id)->delete();

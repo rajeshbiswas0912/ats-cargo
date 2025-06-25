@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnquiryController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,8 @@ Route::middleware('auth')->group(function () {
         Route::get('details/{id}', [EnquiryController::class, 'details'])->name('details');
         Route::post('create-order', [EnquiryController::class, 'create_order'])->name('create-order');
     });
+
+    Route::get('/download-receipt/{id}', [PDFController::class, 'download_receipt'])->name('download-receipt');
 });
 
 require __DIR__ . '/auth.php';
