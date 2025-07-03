@@ -52,11 +52,41 @@
                         value="{{ $order->pickup_mobile }}" placeholder="Mobile Number">
                     </div>
                   </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">City</label>
+                      <input type="text" class="form-control" id="p_city" name="p_city"
+                        value="{{ $order->pickup_city }}" placeholder="City" required>
+                    </div>
+                  </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Address</label>
                       <input type="text" class="form-control" id="p_address" name="p_address"
                         value="{{ $order->pickup_address }}" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">GST Number</label>
+                      <input type="text" class="form-control" id="p_gst_no" name="p_gst_no"
+                        value="{{ $order->pickup_gst }}" placeholder="GST Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">PAN
+                        Number</label>
+                      <input type="text" class="form-control" id="p_pan_no" name="p_pan_no"
+                        value="{{ $order->pickup_pan }}" placeholder="PAN Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Other Document
+                        Number</label>
+                      <input type="text" class="form-control" id="p_other_doc_no" name="p_other_doc_no"
+                        value="{{ $order->pickup_other_doc }}" placeholder="Other Document Number">
                     </div>
                   </div>
                 </div>
@@ -95,11 +125,34 @@
                         value="{{ $order->delivery_mobile }}" placeholder="Mobile Number">
                     </div>
                   </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">City</label>
+                      <input type="text" class="form-control" id="d_city" name="d_city"
+                        value="{{ $order->delivery_city }}" placeholder="City" required>
+                    </div>
+                  </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Address</label>
                       <input type="text" class="form-control" id="d_address" name="d_address"
                         value="{{ $order->delivery_address }}" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">GST
+                        Number</label>
+                      <input type="text" class="form-control" id="d_gst_no" name="d_gst_no"
+                        value="{{ $order->delivery_gst }}" placeholder="GST Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">EWAY Bill
+                        Number</label>
+                      <input type="text" class="form-control" id="eway_bill_no" name="eway_bill_no"
+                        value="{{ $order->delivery_eway_bill }}" placeholder="EWAY Bill Number">
                     </div>
                   </div>
                 </div>
@@ -122,7 +175,7 @@
                         $key++;
                       @endphp
                       <div class="row {{ $key > 1 ? 'other_packages_' . $key : null }}">
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label class="form-label" for="" style="color: black; font-size: 15px;">Material
                               type</label>
@@ -144,6 +197,15 @@
                               style="color: black; font-size: 15px;">Weight</label>
                             <input type="number" class="form-control" id="weight" name="weight[]"
                               placeholder="Weight" value="{{ $item->weight }}">
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label class="form-label" for="" style="color: black; font-size: 15px;">Method of
+                              Packing</label>
+                            <input type="text" class="form-control" id="method_of_packing"
+                              name="method_of_packing[]" placeholder="Method of Packing"
+                              value="{{ $item->method_of_packaging }}" required>
                           </div>
                         </div>
                         <div class="col-lg-2">
@@ -169,6 +231,22 @@
                               (cm)</label>
                             <input type="number" class="form-control" id="width" name="width[]"
                               placeholder="Width (cm)" value="{{ $item->width }}">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label class="form-label" for="" style="color: black; font-size: 15px;">Volume
+                              Weight</label>
+                            <input type="number" class="form-control" id="volume_weight" name="volume_weight[]"
+                              placeholder="Volume Weight" value="{{ $item->volume_weight }}">
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label class="form-label" for="" style="color: black; font-size: 15px;">Charges
+                              Weight</label>
+                            <input type="number" class="form-control" id="charges_weight" name="charges_weight[]"
+                              placeholder="Charges Weight" value="{{ $item->charges_weight }}">
                           </div>
                         </div>
                       </div>
@@ -201,7 +279,7 @@
           <div class="col-lg-12">
             <div class="card border">
               <div class="card-header">
-                <h4>Price & Payment Type</h4>
+                <h4>Material Value & Bill Type</h4>
               </div>
               <div class="card-body">
                 <div class="row">
@@ -214,15 +292,18 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <label class="form-label" for="" style="color: black; font-size: 15px;">Payment
-                        Type</label>
-                      <select name="payment_type" id="payment_type" class="form-control" required>
-                        <option value="0">Please select</option>
-                        <option value="prepaid" {{ $order->payment_type == 'prepaid' ? 'selected' : null }}>Prepaid
-                        </option>
-                        <option value="cod" {{ $order->payment_type == 'cod' ? 'selected' : null }}>Cash on
-                          delivery</option>
-                      </select>
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Invoice
+                        Number</label>
+                      <input type="text" class="form-control" id="invoice_no" name="invoice_no"
+                        placeholder="Invoice Number" required value="{{ $order->invoice_number }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Invoice
+                        Date</label>
+                      <input type="date" class="form-control" id="invoice_date" name="invoice_date"
+                        placeholder="Invoice Date" required value="{{ $order->invoice_date }}">
                     </div>
                   </div>
                 </div>
@@ -239,6 +320,14 @@
               </div>
               <div class="card-body">
                 <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Price Per
+                        KG</label>
+                      <input type="number" class="form-control" id="price_per_kg" name="price_per_kg"
+                        placeholder="Price Per KG" required value="{{ $order->price_per_kg }}">
+                    </div>
+                  </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Shipping
@@ -288,8 +377,135 @@
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">IGST</label>
-                      <input type="number" class="form-control" id="igst" name="igst" placeholder="IGST"
-                        value="{{ $order->igst }}">
+                      <select name="igst" id="igst" class="form-control">
+                        <option value="">IGST</option>
+                        <option value="5" {{ $order->igst == 5 ? 'selected' : '' }}>5%</option>
+                        <option value="12" {{ $order->igst == 12 ? 'selected' : '' }}>12%</option>
+                        <option value="18" {{ $order->igst == 18 ? 'selected' : '' }}>18%</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Total</label>
+                      <input type="number" class="form-control" id="total" name="total" placeholder="Total"
+                        value="{{ $order->sub_total }}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card border">
+              <div class="card-header">
+                <h4>Delivery Type</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Mode of
+                        Transport</label>
+                      <select name="mode_of_transport" id="mode_of_transport" class="form-control" required>
+                        <option value="">Mode of Transport</option>
+                        <option value="road" {{ $order->mode_of_transport == 'road' ? 'selected' : null }}>Road
+                        </option>
+                        <option value="rail" {{ $order->mode_of_transport == 'rail' ? 'selected' : null }}>Rail
+                        </option>
+                        <option value="air" {{ $order->mode_of_transport == 'air' ? 'selected' : null }}>Air
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Payment
+                        Type</label>
+                      <select name="payment_type" id="payment_type" class="form-control" required>
+                        <option value="">Payment Type</option>
+                        <option value="Prepaid" {{ $order->payment_type == 'Prepaid' ? 'selected' : null }}>Prepaid
+                        </option>
+                        <option value="Cash On" {{ $order->payment_type == 'Cash On' ? 'selected' : null }}>Cash On
+                        </option>
+                        <option value="To Be Bill" {{ $order->payment_type == 'To Be Bill' ? 'selected' : null }}>To
+                          Be Bill</option>
+                        <option value="Freight on Delivery"
+                          {{ $order->payment_type == 'Freight on Delivery' ? 'selected' : null }}>Freight on Delivery
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Mode of
+                        Delivery</label>
+                      <select name="mode_of_delivery" id="mode_of_delivery" class="form-control" required>
+                        <option value="">Mode of Delivery</option>
+                        <option value="Door to Door"
+                          {{ $order->mode_of_delivery == 'Door to Door' ? 'selected' : null }}>Door to Door</option>
+                        <option value="Godown to Door"
+                          {{ $order->mode_of_delivery == 'Godown to Door' ? 'selected' : null }}>Godown to Door
+                        </option>
+                        <option value="Godown to Godown"
+                          {{ $order->mode_of_delivery == 'Godown to Godown' ? 'selected' : null }}>Godown to Godown
+                        </option>
+                        <option value="Door to Godown"
+                          {{ $order->mode_of_delivery == 'Door to Godown' ? 'selected' : null }}>Door to Godown
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">GST Paid
+                        By</label>
+                      <select name="gst_paid_by" id="gst_paid_by" class="form-control">
+                        <option value="">GST Paid By</option>
+                        <option value="Consignor" {{ $order->gst_paid_by == 'Consignor' ? 'selected' : null }}>
+                          Consignor</option>
+                        <option value="Consignee" {{ $order->gst_paid_by == 'Consignee' ? 'selected' : null }}>
+                          Consignee</option>
+                        <option value="Transpoter" {{ $order->gst_paid_by == 'Transpoter' ? 'selected' : null }}>
+                          Transpoter</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Vehicle
+                        Number</label>
+                      <input type="text" class="form-control" id="vehicle_no" name="vehicle_no"
+                        placeholder="Vehicle Number" value="{{ $order->vehicle_number }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Challan
+                        Number</label>
+                      <input type="text" class="form-control" id="challan_no" name="challan_no"
+                        placeholder="Challan Number" value="{{ $order->challan_number }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Owner
+                        Risk/Carrier Risk</label>
+                      <select name="owner_risk_carrier_risk" id="owner_risk_carrier_risk" class="form-control">
+                        <option value="">Owner Risk/Carrier Risk</option>
+                        <option value="Yes" {{ $order->owner_risk == 'Yes' ? 'selected' : null }}>Yes</option>
+                        <option value="No" {{ $order->owner_risk == 'No' ? 'selected' : null }}>No</option>
+                        <option value="O/R" {{ $order->owner_risk == 'O/R' ? 'selected' : null }}>O/R</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">Remarks</label>
+                      <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks">{{ $order->remarks }}</textarea>
                     </div>
                   </div>
                 </div>

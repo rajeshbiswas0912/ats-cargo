@@ -56,7 +56,6 @@ class OrdersController extends Controller
                 'd_address' => 'required|string',
 
                 //Price & Payment Details
-                'payment_type' => 'required|string|in:prepaid,cod',
                 'price' => 'required|numeric|min:0',
 
                 // Array Fields
@@ -126,19 +125,37 @@ class OrdersController extends Controller
                 'pickup_pincode' => $validated['p_pincode'],
                 'pickup_mobile' => $validated['p_mobile'],
                 'pickup_address' => $validated['p_address'],
+                'pickup_city' => $request->p_city ?? null,
+                'pickup_gst' => $request->p_gst_no ?? null,
+                'pickup_pan' => $request->p_pan_no ?? null,
+                'pickup_other_doc' => $request->p_other_doc_no ?? null,
                 'delivery_name' => $validated['d_name'],
                 'delivery_pincode' => $validated['d_pincode'],
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
+                'delivery_city' => $request->d_city ?? null,
+                'delivery_gst' => $request->d_gst_no ?? null,
+                'delivery_eway_bill' => $request->eway_bill_no ?? null,
                 'total_amount' => $validated['price'],
-                'payment_type' => $validated['payment_type'],
+                'invoice_number' => $request->invoice_no ?? null,
+                'invoice_date' => $request->invoice_date ? Carbon::parse($request->invoice_date)->format('Y-m-d') : null,
+                'price_per_kg' => $request->price_per_kg,
                 'shipping_charge' => $request->shipping_charge,
                 'pickup_charge' => $request->pickup_charge,
                 'hamali' => $request->hamali,
                 'sc_cost' => $request->sc_cost,
                 'st_charge' => $request->st_charge,
                 'delivery_charge' => $request->delivery_charge,
-                'igst' => $request->igst
+                'igst' => $request->igst,
+                'sub_total' => $request->total,
+                'payment_type' => $request->payment_type ?? null,
+                'mode_of_transport' => $request->mode_of_transport ?? null,
+                'mode_of_delivery' => $request->mode_of_delivery ?? null,
+                'gst_paid_by' => $request->gst_paid_by ?? null,
+                'vehicle_number' => $request->vehicle_no ?? null,
+                'challan_number' => $request->challan_no ?? null,
+                'owner_risk' => $request->owner_risk_carrier_risk ?? null,
+                'remarks' => $request->remarks ?? null,
             ]);
 
             $count = count($validated['material_type']);
@@ -150,7 +167,10 @@ class OrdersController extends Controller
                     'weight' => $validated['weight'][$i],
                     'height' => $validated['height'][$i],
                     'length' => $validated['length'][$i],
-                    'width' => $validated['width'][$i]
+                    'width' => $validated['width'][$i],
+                    'method_of_packaging' => $request->method_of_packing ? $request->method_of_packing[$i] : 0,
+                    'volume_weight' => $request->volume_weight ? $request->volume_weight[$i] : 0,
+                    'charges_weight' => $request->charges_weight ? $request->charges_weight[$i] : 0
                 ]);
             }
 
@@ -233,7 +253,6 @@ class OrdersController extends Controller
                 'd_address' => 'required|string',
 
                 //Price & Payment Details
-                'payment_type' => 'required|string|in:prepaid,cod',
                 'price' => 'required|numeric|min:0',
 
                 // Array Fields
@@ -308,19 +327,37 @@ class OrdersController extends Controller
                 'pickup_pincode' => $validated['p_pincode'],
                 'pickup_mobile' => $validated['p_mobile'],
                 'pickup_address' => $validated['p_address'],
+                'pickup_city' => $request->p_city ?? null,
+                'pickup_gst' => $request->p_gst_no ?? null,
+                'pickup_pan' => $request->p_pan_no ?? null,
+                'pickup_other_doc' => $request->p_other_doc_no ?? null,
                 'delivery_name' => $validated['d_name'],
                 'delivery_pincode' => $validated['d_pincode'],
                 'delivery_mobile' => $validated['d_mobile'],
                 'delivery_address' => $validated['d_address'],
+                'delivery_city' => $request->d_city ?? null,
+                'delivery_gst' => $request->d_gst_no ?? null,
+                'delivery_eway_bill' => $request->eway_bill_no ?? null,
                 'total_amount' => $validated['price'],
-                'payment_type' => $validated['payment_type'],
+                'invoice_number' => $request->invoice_no ?? null,
+                'invoice_date' => $request->invoice_date ? Carbon::parse($request->invoice_date)->format('Y-m-d') : null,
+                'price_per_kg' => $request->price_per_kg,
                 'shipping_charge' => $request->shipping_charge,
                 'pickup_charge' => $request->pickup_charge,
                 'hamali' => $request->hamali,
                 'sc_cost' => $request->sc_cost,
                 'st_charge' => $request->st_charge,
                 'delivery_charge' => $request->delivery_charge,
-                'igst' => $request->igst
+                'igst' => $request->igst,
+                'sub_total' => $request->total,
+                'payment_type' => $request->payment_type ?? null,
+                'mode_of_transport' => $request->mode_of_transport ?? null,
+                'mode_of_delivery' => $request->mode_of_delivery ?? null,
+                'gst_paid_by' => $request->gst_paid_by ?? null,
+                'vehicle_number' => $request->vehicle_no ?? null,
+                'challan_number' => $request->challan_no ?? null,
+                'owner_risk' => $request->owner_risk_carrier_risk ?? null,
+                'remarks' => $request->remarks ?? null,
             ]);
 
             OrderPackage::where('order_id', $order->id)->delete();
@@ -334,7 +371,10 @@ class OrdersController extends Controller
                     'weight' => $validated['weight'][$i],
                     'height' => $validated['height'][$i],
                     'length' => $validated['length'][$i],
-                    'width' => $validated['width'][$i]
+                    'width' => $validated['width'][$i],
+                    'method_of_packaging' => $request->method_of_packing ? $request->method_of_packing[$i] : 0,
+                    'volume_weight' => $request->volume_weight ? $request->volume_weight[$i] : 0,
+                    'charges_weight' => $request->charges_weight ? $request->charges_weight[$i] : 0
                 ]);
             }
 

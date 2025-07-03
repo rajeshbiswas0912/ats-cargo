@@ -84,55 +84,65 @@
         Email: atscouriercargos@gmail.com <br />
         GSTIN: 19BVWPR8378A1ZO
       </td>
-      <td colspan="2"><strong>Mode of Transport:</strong> Road</td>
+      <td colspan="2"><strong>Mode of Transport:</strong> {{ ucfirst($order->mode_of_transport) }}</td>
       <td colspan="2" style="width: 15%"><strong>Date: </strong>
         {{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
     </tr>
     <tr>
-      <td colspan="2"><strong>From: </strong>{{ $order->pickup_pincode }}</td>
+      <td colspan="2"><strong>From: </strong>{{ $order->pickup_city }}</td>
       <td colspan="2">
         <strong>Freight <br />
           Mode:</strong>
+        {{ $order->payment_type }}
       </td>
       <td colspan="2" rowspan="2">
         <span><strong>GST To Be Paid:</span><br>
-        <span>Consignor <input type="text" style="width: 10%;margin-bottom: 4px;margin-top: 4px;"></span><br>
-        <span>Consignee <input type="text" style="width: 10%;margin-bottom: 4px;"></span><br>
-        <span>Transporter <input type="text" style="width: 10%;margin-bottom: 4px;"></span>
+        <span>Consignor <input type="checkbox" {{ $order->gst_paid_by == 'Consignor' ? 'checked' : null }}
+            style="width: 10%;margin-bottom: 4px;margin-top: 4px;"></span><br>
+        <span>Consignee <input type="checkbox" {{ $order->gst_paid_by == 'Consignee' ? 'checked' : null }}
+            style="width: 10%;margin-bottom: 4px;"></span><br>
+        <span>Transporter <input type="checkbox" {{ $order->gst_paid_by == 'Transpoter' ? 'checked' : null }}
+            style="width: 10%;margin-bottom: 4px;"></span>
         </strong>
       </td>
     </tr>
     <tr>
-      <td colspan="2"><strong>To:</strong> {{ $order->delivery_pincode }}</td>
+      <td colspan="2"><strong>To:</strong> {{ $order->delivery_city }}</td>
       <td colspan="2">
         <strong>Mode of <br />
           Delivery:</strong>
+        {{ $order->mode_of_delivery }}
       </td>
     </tr>
     <tr>
-      <td colspan="3"><strong>Challan No:</strong></td>
-      <td colspan="4"><strong>Veichle NO:</strong></td>
+      <td colspan="3"><strong>Challan No:</strong> {{ $order->challan_number }}</td>
+      <td colspan="4"><strong>Veichle NO:</strong> {{ $order->vehicle_number }}</td>
     </tr>
 
     <!-- Consignor / Consignee -->
     <tr>
-      <td colspan="5"><strong>CONSIGNOR </strong>{{ $order->pickup_name }}<br />{{ $order->pickup_address }},
-        {{ $order->pickup_pincode }}<br /><br /><br />Phone / Mobile: {{ $order->pickup_mobile }}</td>
-      <td colspan="5"><strong>CONSIGNEE </strong>{{ $order->delivery_name }}<br />{{ $order->delivery_address }},
-        {{ $order->delivery_pincode }}<br /><br /><br />Phone / Mobile: {{ $order->delivery_mobile }}</td>
+      <td colspan="5"><strong>CONSIGNOR </strong>{{ $order->pickup_name }}<br />{{ $order->pickup_address }}<br>
+        <span style="text-align: right;">{{ $order->pickup_pincode }}</span><br /><br /><br />Phone / Mobile:
+        {{ $order->pickup_mobile }}
+      </td>
+      <td colspan="5"><strong>CONSIGNEE
+        </strong>{{ $order->delivery_name }}<br />{{ $order->delivery_address }}<br>
+        <span style="text-align: right;">{{ $order->delivery_pincode }}</span><br /><br /><br />Phone / Mobile:
+        {{ $order->delivery_mobile }}
+      </td>
     </tr>
 
     <tr>
       <td style="background: #b1b1f7; color: #060044"><strong>GSTIN NO:</strong></td>
-      <td colspan="4"></td>
+      <td colspan="4">{{ $order->pickup_gst }}</td>
       <td style="background: #b1b1f7; color: #060044"><strong>GSTIN NO:</strong></td>
-      <td colspan="4"></td>
+      <td colspan="4">{{ $order->delivery_gst }}</td>
     </tr>
     <tr>
       <td style="background: #b1b1f7; color: #060044"><strong>PAN NO:</strong></td>
-      <td colspan="4"></td>
+      <td colspan="4">{{ $order->pickup_pan ? $order->pickup_pan : $order->pickup_other_doc }}</td>
       <td style="background: #b1b1f7; color: #060044"><strong>WAY BILL NO:</strong></td>
-      <td colspan="4"></td>
+      <td colspan="4">{{ $order->delivery_eway_bill }}</td>
     </tr>
 
     <!-- Package Details -->
@@ -164,12 +174,12 @@
     </tr>
     <tr>
       <td rowspan="4">{{ $packages->sum('no_of_box') }}</td>
-      <td rowspan="4"></td>
-      <td colspan="2" rowspan="4"></td>
+      <td rowspan="4">{{ $packages ? $packages->first()->method_of_packaging : null }}</td>
+      <td colspan="2" rowspan="4">{{ $packages ? $packages->first()->material_type : null }}</td>
+      <td rowspan="4">{{ $packages->sum('volume_weight') }} KG</td>
       <td rowspan="4">{{ $packages->sum('weight') }} KG</td>
-      <td rowspan="4"></td>
-      <td rowspan="4"></td>
-      <td><br></td>
+      <td rowspan="4">{{ $packages->sum('charges_weight') }} KG</td>
+      <td>{{ $order->price_per_kg }}</td>
       <td>{{ $order->shipping_charge }}</td>
       <td></td>
     </tr>
@@ -193,7 +203,8 @@
     <tr>
       <td rowspan="2" style="background: #b1b1f7;text-align: center; color: #060044"><strong>Invoice <br> No &
           Date</strong></td>
-      <td rowspan="2">{{ $order->tracking_no }}<br>{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}
+      <td rowspan="2">
+        {{ $order->invoice_number }}<br>{{ $order->invoice_date ? \Carbon\Carbon::parse($order->invoice_date)->format('d/m/Y') : null }}
       </td>
       <td colspan="4" style="text-align: center; background: #b1b1f7; color: #060044">
         <strong>AT OWNER RISK/CARRIER'S RISK</strong>
@@ -206,13 +217,14 @@
     <tr>
       <td colspan="4" rowspan="3" style="text-align: center;padding-left: 10px;">
         <span><strong>If Insured, details of Insurance Policy</strong></span><br><br>
+        <span style="text-align: right;">{{ $order->owner_risk }}</span><br>
         <span>Policy No. - __________________________</span>
         <span>Date - ________________________________</span><br><br>
         <span>Insurance Company - ____________________</span><br><br>
         <span>Insurance Value - ______________________</span>
       </td>
 
-      <td rowspan="3"> </td>
+      <td rowspan="3">{{ $order->remarks }}</td>
       <td>
         <strong>Delivery<br />
           Charge</strong>
@@ -225,13 +237,13 @@
           ₹</strong></td>
       <td rowspan="2">{{ $order->total_amount }}</td>
       <td><strong>IGST</strong></td>
-      <td>{{ $order->igst }}</td>
+      <td>{{ $order->igst }}%</td>
       <td></td>
     </tr>
     <tr>
       <td><strong>TOTAL</strong></td>
       <td>
-        {{ number_format($order->igst + $order->shipping_charge + $order->pickup_charge + $order->delivery_charge + $order->st_charge + $order->sc_cost + $order->hamali, 2) }}
+        {{ $order->sub_total }}
       </td>
       <td></td>
     </tr>

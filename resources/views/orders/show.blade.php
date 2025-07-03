@@ -68,11 +68,41 @@
                       value="{{ $order->pickup_mobile }}" placeholder="Mobile Number" readonly>
                   </div>
                 </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">City</label>
+                    <input type="text" class="form-control" id="d_city" name="d_city"
+                      value="{{ $order->pickup_city }}" placeholder="City" readonly>
+                  </div>
+                </div>
                 <div class="col-lg-12">
                   <div class="form-group">
                     <label class="form-label" for="" style="color: black; font-size: 15px;">Address</label>
                     <input type="text" class="form-control" id="p_address" name="p_address"
                       value="{{ $order->pickup_address }}" placeholder="Address" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">GST Number</label>
+                    <input type="text" class="form-control" id="d_gst_no" name="d_gst_no"
+                      value="{{ $order->pickup_gst }}" placeholder="GST Number" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">PAN
+                      Number</label>
+                    <input type="text" class="form-control" id="p_pan_no" name="p_pan_no"
+                      value="{{ $order->pickup_pan }}" placeholder="PAN Number" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Other Document
+                      Number</label>
+                    <input type="text" class="form-control" id="p_other_doc_no" name="p_other_doc_no"
+                      value="{{ $order->pickup_other_doc }}" placeholder="Other Document Number" readonly>
                   </div>
                 </div>
               </div>
@@ -111,11 +141,34 @@
                       value="{{ $order->delivery_mobile }}" placeholder="Mobile Number" readonly>
                   </div>
                 </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">City</label>
+                    <input type="text" class="form-control" id="d_city" name="d_city"
+                      value="{{ $order->delivery_city }}" placeholder="City" readonly>
+                  </div>
+                </div>
                 <div class="col-lg-12">
                   <div class="form-group">
                     <label class="form-label" for="" style="color: black; font-size: 15px;">Address</label>
                     <input type="text" class="form-control" id="d_address" name="d_address"
                       value="{{ $order->delivery_address }}" placeholder="Address" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">GST
+                      Number</label>
+                    <input type="text" class="form-control" id="d_gst_no" name="d_gst_no"
+                      value="{{ $order->delivery_gst }}" placeholder="GST Number" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">EWAY Bill
+                      Number</label>
+                    <input type="text" class="form-control" id="eway_bill_no" name="eway_bill_no"
+                      value="{{ $order->delivery_eway_bill }}" placeholder="EWAY Bill Number" readonly>
                   </div>
                 </div>
               </div>
@@ -138,7 +191,7 @@
                       <div class="col-lg-12">
                         <h5>Package {{ $key + 1 }}</h5>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label class="form-label" for="" style="color: black; font-size: 15px;">Material
                             Type</label>
@@ -160,6 +213,15 @@
                             style="color: black; font-size: 15px;">Weight</label>
                           <input type="text" class="form-control" id="weight" name="weight[]"
                             placeholder="Weight" value="{{ $package->weight }}" readonly>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label class="form-label" for="" style="color: black; font-size: 15px;">Method of
+                            Packing</label>
+                          <input type="text" class="form-control" id="method_of_packing"
+                            name="method_of_packing[]" placeholder="Method of Packing"
+                            value="{{ $package->method_of_packaging }}" readonly>
                         </div>
                       </div>
                       <div class="col-lg-2">
@@ -187,6 +249,22 @@
                             placeholder="Width" value="{{ $package->weight }}" readonly>
                         </div>
                       </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <label class="form-label" for="" style="color: black; font-size: 15px;">Volume
+                            Weight</label>
+                          <input type="number" class="form-control" id="volume_weight" name="volume_weight[]"
+                            placeholder="Volume Weight" value="{{ $package->volume_weight }}" readonly>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <label class="form-label" for="" style="color: black; font-size: 15px;">Charges
+                            Weight</label>
+                          <input type="number" class="form-control" id="charges_weight" name="charges_weight[]"
+                            placeholder="Charges Weight" value="{{ $package->charges_weight }}" readonly>
+                        </div>
+                      </div>
                     </div>
                   @endforeach
                 @endif
@@ -200,28 +278,33 @@
         <div class="col-lg-12">
           <div class="card border">
             <div class="card-header">
-              <h4>Price & Payment Type</h4>
+              <h4>Material Value & Bill Type</h4>
             </div>
             <div class="card-body">
               <div class="row">
                 <div class="col-lg-3">
                   <div class="form-group">
-                    <label class="form-label" for="" style="color: black; font-size: 15px;">Price</label>
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Material
+                      Value</label>
                     <input type="number" class="form-control" id="price" name="price" placeholder="Price"
                       value="{{ $order->total_amount }}" readonly>
                   </div>
                 </div>
                 <div class="col-lg-3">
                   <div class="form-group">
-                    <label class="form-label" for="" style="color: black; font-size: 15px;">Payment
-                      Type</label>
-                    <select name="payment_type" id="payment_type" class="form-control" disabled>
-                      <option value="0">Please select</option>
-                      <option value="prepaid" {{ $order->payment_type == 'prepaid' ? 'selected' : null }}>Prepaid
-                      </option>
-                      <option value="cod" {{ $order->payment_type == 'cod' ? 'selected' : null }}>Cash on delivery
-                      </option>
-                    </select>
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Invoice
+                      Number</label>
+                    <input type="text" class="form-control" id="invoice_no" name="invoice_no"
+                      placeholder="Invoice Number" readonly value="{{ $order->invoice_number }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Invoice
+                      Date</label>
+                    <input type="text" class="form-control" id="invoice_date" name="invoice_date"
+                      placeholder="Invoice Date" readonly
+                      value="{{ \Carbon\Carbon::parse($order->invoice_date)->format('d-m-Y') }}">
                   </div>
                 </div>
               </div>
@@ -238,6 +321,14 @@
             </div>
             <div class="card-body">
               <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Price Per
+                      KG</label>
+                    <input type="number" class="form-control" id="price_per_kg" name="price_per_kg"
+                      placeholder="Price Per KG" readonly value="{{ $order->price_per_kg }}">
+                  </div>
+                </div>
                 <div class="col-lg-3">
                   <div class="form-group">
                     <label class="form-label" for="" style="color: black; font-size: 15px;">Shipping
@@ -287,8 +378,91 @@
                 <div class="col-lg-3">
                   <div class="form-group">
                     <label class="form-label" for="" style="color: black; font-size: 15px;">IGST</label>
-                    <input type="number" class="form-control" id="igst" name="igst" placeholder="IGST"
-                      value="{{ $order->igst }}" readonly>
+                    <input type="text" class="form-control" id="igst" name="igst" placeholder="IGST"
+                      value="{{ $order->igst }}%" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Total</label>
+                    <input type="number" class="form-control" id="total" name="total" placeholder="Total"
+                      readonly value="{{ $order->sub_total }}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card border">
+            <div class="card-header">
+              <h4>Delivery Type</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Mode of
+                      Transport</label>
+                    <input type="text" class="form-control" id="price_per_kg" name="price_per_kg"
+                      placeholder="Mode of Transport" readonly value="{{ ucfirst($order->mode_of_transport) }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Payment
+                      Type</label>
+                    <input type="text" class="form-control" id="price_per_kg" name="price_per_kg"
+                      placeholder="Payment Type" readonly value="{{ $order->payment_type }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Mode of
+                      Delivery</label>
+                    <input type="text" class="form-control" id="price_per_kg" name="price_per_kg"
+                      placeholder="Mode of Delivery" readonly value="{{ $order->mode_of_delivery }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">GST Paid
+                      By</label>
+                    <input type="text" class="form-control" id="price_per_kg" name="price_per_kg"
+                      placeholder="GST Paid By" readonly value="{{ $order->gst_paid_by }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Vehicle
+                      Number</label>
+                    <input type="text" class="form-control" id="vehicle_no" name="vehicle_no"
+                      placeholder="Vehicle Number" readonly value="{{ $order->vehicle_number }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Challan
+                      Number</label>
+                    <input type="text" class="form-control" id="challan_no" name="challan_no"
+                      placeholder="Challan Number" readonly value="{{ $order->challan_number }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Owner
+                      Risk/Carrier Risk</label>
+                    <input type="text" class="form-control" id="challan_no" name="challan_no"
+                      placeholder="Owner Risk/Carrier Risk" readonly value="{{ $order->owner_risk }}">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">Remarks</label>
+                    <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks" readonly>{{ $order->remarks }}</textarea>
                   </div>
                 </div>
               </div>

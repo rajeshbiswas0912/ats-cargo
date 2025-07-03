@@ -33,14 +33,38 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="number" class="form-control" id="p_mobile" name="p_mobile"
+                      <input type="tel" class="form-control" id="p_mobile" name="p_mobile"
                         value="{{ old('p_mobile') }}" placeholder="Mobile Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="p_city" name="p_city"
+                        value="{{ old('p_city') }}" placeholder="City" required>
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <input type="text" class="form-control" id="p_address" name="p_address"
                         value="{{ old('p_address') }}" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="p_gst_no" name="p_gst_no"
+                        value="{{ old('p_gst_no') }}" placeholder="GST Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="p_pan_no" name="p_pan_no"
+                        value="{{ old('p_pan_no') }}" placeholder="PAN Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="p_other_doc_no" name="p_other_doc_no"
+                        value="{{ old('p_other_doc_no') }}" placeholder="Other Document Number">
                     </div>
                   </div>
                 </div>
@@ -71,14 +95,32 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="number" class="form-control" id="d_mobile" name="d_mobile"
+                      <input type="tel" class="form-control" id="d_mobile" name="d_mobile"
                         value="{{ old('d_mobile') }}" placeholder="Mobile Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="d_city" name="d_city"
+                        value="{{ old('d_city') }}" placeholder="City" required>
                     </div>
                   </div>
                   <div class="col-lg-12">
                     <div class="form-group">
                       <input type="text" class="form-control" id="d_address" name="d_address"
                         value="{{ old('d_address') }}" placeholder="Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="d_gst_no" name="d_gst_no"
+                        value="{{ old('d_gst_no') }}" placeholder="GST Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="eway_bill_no" name="eway_bill_no"
+                        value="{{ old('eway_bill_no') }}" placeholder="EWAY Bill Number">
                     </div>
                   </div>
                 </div>
@@ -96,7 +138,7 @@
               <div class="card-body">
                 <div class="packages">
                   <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <input type="text" class="form-control" id="material_type" name="material_type[]"
                           placeholder="Material type">
@@ -112,6 +154,12 @@
                       <div class="form-group">
                         <input type="number" class="form-control" id="weight" name="weight[]"
                           placeholder="Weight">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="method_of_packing" name="method_of_packing[]"
+                          placeholder="Method of Packing" required>
                       </div>
                     </div>
                     <div class="col-lg-2">
@@ -132,6 +180,18 @@
                           placeholder="Width (cm)">
                       </div>
                     </div>
+                    <div class="col-lg-2">
+                      <div class="form-group">
+                        <input type="number" class="form-control" id="volume_weight" name="volume_weight[]"
+                          placeholder="Volume Weight">
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <div class="form-group">
+                        <input type="number" class="form-control" id="charges_weight" name="charges_weight[]"
+                          placeholder="Charges Weight">
+                      </div>
+                    </div>
                   </div>
                   <div class="row mb-4">
                     <div class="col-lg-12 text-right">
@@ -149,23 +209,27 @@
           <div class="col-lg-12">
             <div class="card border">
               <div class="card-header">
-                <h4>Price & Payment Type</h4>
+                <h4>Material Value & Bill Type</h4>
               </div>
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="number" class="form-control" id="price" name="price" placeholder="Price"
-                        required>
+                      <input type="number" class="form-control" id="price" name="price"
+                        placeholder="Material Value" required>
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <select name="payment_type" id="payment_type" class="form-control" required>
-                        <option value="0">Please select</option>
-                        <option value="prepaid">Prepaid</option>
-                        <option value="cod">Cash on delivery</option>
-                      </select>
+                      <input type="text" class="form-control" id="invoice_no" name="invoice_no"
+                        placeholder="Invoice Number" required>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="invoice_date" name="invoice_date"
+                        placeholder="Invoice Date" required onfocus="(this.type='date')"
+                        onblur="if(this.value===''){this.type='text'}">
                     </div>
                   </div>
                 </div>
@@ -182,6 +246,12 @@
               </div>
               <div class="card-body">
                 <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="price_per_kg" name="price_per_kg"
+                        placeholder="Price Per KG">
+                    </div>
+                  </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <input type="number" class="form-control" id="shipping_charge" name="shipping_charge"
@@ -219,7 +289,101 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
-                      <input type="number" class="form-control" id="igst" name="igst" placeholder="IGST">
+                      <select name="igst" id="igst" class="form-control">
+                        <option value="">IGST</option>
+                        <option value="5">5%</option>
+                        <option value="12">12%</option>
+                        <option value="18">18%</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="number" class="form-control" id="total" name="total" placeholder="Total"
+                        required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card border">
+              <div class="card-header">
+                <h4>Delivery Type</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="mode_of_transport" id="mode_of_transport" class="form-control" required>
+                        <option value="">Mode of Transport</option>
+                        <option value="road">Road</option>
+                        <option value="rail">Rail</option>
+                        <option value="air">Air</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="payment_type" id="payment_type" class="form-control" required>
+                        <option value="">Payment Type</option>
+                        <option value="Prepaid">Prepaid</option>
+                        <option value="Cash On">Cash On</option>
+                        <option value="To Be Bill">To Be Bill</option>
+                        <option value="Freight on Delivery">Freight on Delivery</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="mode_of_delivery" id="mode_of_delivery" class="form-control" required>
+                        <option value="">Mode of Delivery</option>
+                        <option value="Door to Door">Door to Door</option>
+                        <option value="Godown to Door">Godown to Door</option>
+                        <option value="Godown to Godown">Godown to Godown</option>
+                        <option value="Door to Godown">Door to Godown</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="gst_paid_by" id="gst_paid_by" class="form-control">
+                        <option value="">GST Paid By</option>
+                        <option value="Consignor">Consignor</option>
+                        <option value="Consignee">Consignee</option>
+                        <option value="Transpoter">Transpoter</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="vehicle_no" name="vehicle_no"
+                        placeholder="Vehicle Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <input type="text" class="form-control" id="challan_no" name="challan_no"
+                        placeholder="Challan Number">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <select name="owner_risk_carrier_risk" id="owner_risk_carrier_risk" class="form-control">
+                        <option value="">Owner Risk/Carrier Risk</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="O/R">O/R</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
+                      <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks"></textarea>
                     </div>
                   </div>
                 </div>
@@ -247,7 +411,7 @@
         let count = Number($(this).attr('data-count-row'));
         count++;
         let html = `<div class="row other_packages_${count}">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <input type="text" class="form-control" name="material_type[]"
                           placeholder="Material type">
@@ -263,6 +427,12 @@
                       <div class="form-group">
                         <input type="number" class="form-control" name="weight[]"
                           placeholder="Weight">
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="method_of_packing" name="method_of_packing[]"
+                          placeholder="Method of Packing" required>
                       </div>
                     </div>
                     <div class="col-lg-2">
@@ -281,6 +451,18 @@
                       <div class="form-group">
                         <input type="number" class="form-control" name="width[]"
                           placeholder="Width (cm)">
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <div class="form-group">
+                        <input type="number" class="form-control" id="volume_weight" name="volume_weight[]"
+                          placeholder="Volume Weight">
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <div class="form-group">
+                        <input type="number" class="form-control" id="charges_weight" name="charges_weight[]"
+                          placeholder="Charges Weight">
                       </div>
                     </div>
                   </div>
