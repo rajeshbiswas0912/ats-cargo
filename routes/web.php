@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/download-receipt/{id}', [PDFController::class, 'download_receipt'])->name('download-receipt');
+    Route::get('/tax-invoice/{id}', [PDFController::class, 'tax_invoice'])->name('tax-invoice');
 });
 
 require __DIR__ . '/auth.php';

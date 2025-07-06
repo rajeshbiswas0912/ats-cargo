@@ -14,7 +14,6 @@ class PDFController extends Controller
     {
         $order = Order::findOrFail($id);
         $packages = OrderPackage::where('order_id', $id)->get();
-        $qr = QrCode::size(200)->generate(route('enquiry.tracking', ['tracking_no' => $order->tracking_no]));
         $qrPng = QrCode::format('png')
             ->size(100)                 // px
             ->margin(0)                 // optional
@@ -27,5 +26,17 @@ class PDFController extends Controller
         $pdf = Pdf::loadView('pdf.order-receipt', ['order' => $order, 'packages' => $packages, 'type' => request()->type, 'qrCode' => $qrBase64]);
 
         return $pdf->download('order-receipt.pdf');
+    }
+
+    public function tax_invoice($id)
+    {
+        $order = Order::findOrFail($id);
+        $packages = OrderPackage::where('order_id', $id)->get();
+        $stamp = base64_encode(
+            file_get_contents(public_path('images/tax-invoice-stamp.jpg'))
+        );
+        $pdf = Pdf::loadView('pdf.tax-invoice', ['order' => $order, 'packages' => $packages, 'stamp' => $stamp]);
+
+        return $pdf->download('tax-invoice.pdf');
     }
 }

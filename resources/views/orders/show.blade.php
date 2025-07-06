@@ -34,6 +34,7 @@
               class="btn btn-primary">Consignee</a>
             <a href="{{ route('download-receipt', ['id' => $order->id, 'type' => 'DESTINATION']) }}"
               class="btn btn-primary">Destination</a>
+            <a href="{{ route('tax-invoice', ['id' => $order->id]) }}" class="btn btn-primary">Tax Invoice</a>
           </div>
         </div>
       </div>
