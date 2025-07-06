@@ -278,8 +278,11 @@
 
       <td colspan="4" rowspan="2">RECEIVED ABOVE SHIPMENT IN ORDER AND IN GOOD CONDITION.I/WE HEREBY AGREE TO PAY
         ALL CHARGES INCLUDING OCTROI & TAXES AS APPLICABLE.<br><br><br><br><br>
-        Signature Of Receiver <br>With Rubber Stamp & Date
+        <span>
+          Signature Of Receiver <br>With Rubber Stamp & Date
+        </span>
         <span style="border: 1px solid #000;padding: 5px;margin-left: 33px;">{{ $type }} COPY</span>
+        <span><img class="qr" src="data:image/png;base64,{{ $qrCode }}" alt="QR code"></span>
       </td>
     </tr>
     <tr>
