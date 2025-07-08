@@ -167,7 +167,7 @@
               <div class="card-header">
                 <h4>Package Details</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body" id="package_details">
                 <div class="packages">
                   @if ($order->packages->isNotEmpty())
                     @foreach ($order->packages as $key => $item)
@@ -195,7 +195,7 @@
                           <div class="form-group">
                             <label class="form-label" for=""
                               style="color: black; font-size: 15px;">Weight</label>
-                            <input type="number" class="form-control" id="weight" name="weight[]"
+                            <input type="number" class="form-control charge" id="weight" name="weight[]"
                               placeholder="Weight" value="{{ $item->weight }}">
                           </div>
                         </div>
@@ -318,7 +318,7 @@
               <div class="card-header">
                 <h4>Shipping Details</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body" id="shipping_details">
                 <div class="row">
                   <div class="col-lg-3">
                     <div class="form-group">
@@ -332,7 +332,7 @@
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Shipping
                         Price</label>
-                      <input type="number" class="form-control" id="shipping_charge" name="shipping_charge"
+                      <input type="number" class="form-control charge" id="shipping_charge" name="shipping_charge"
                         placeholder="Shipping Price" value="{{ $order->shipping_charge }}">
                     </div>
                   </div>
@@ -340,29 +340,29 @@
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Pickup
                         Charge</label>
-                      <input type="number" class="form-control" id="pickup_charge" name="pickup_charge"
+                      <input type="number" class="form-control charge" id="pickup_charge" name="pickup_charge"
                         placeholder="Pickup Charge" value="{{ $order->pickup_charge }}">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Hamali</label>
-                      <input type="number" class="form-control" id="hamali" name="hamali" placeholder="Hamali"
-                        value="{{ $order->hamali }}">
+                      <input type="number" class="form-control charge" id="hamali" name="hamali"
+                        placeholder="Hamali" value="{{ $order->hamali }}">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">S/C</label>
-                      <input type="number" class="form-control" id="sc_cost" name="sc_cost" placeholder="S/C"
-                        value="{{ $order->sc_cost }}">
+                      <input type="number" class="form-control charge" id="sc_cost" name="sc_cost"
+                        placeholder="S/C" value="{{ $order->sc_cost }}">
                     </div>
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">ST.
                         Charge</label>
-                      <input type="number" class="form-control" id="st_charge" name="st_charge"
+                      <input type="number" class="form-control charge" id="st_charge" name="st_charge"
                         placeholder="ST. Charge" value="{{ $order->st_charge }}">
                     </div>
                   </div>
@@ -370,7 +370,7 @@
                     <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Delivery
                         Charge</label>
-                      <input type="number" class="form-control" id="delivery_charge" name="delivery_charge"
+                      <input type="number" class="form-control charge" id="delivery_charge" name="delivery_charge"
                         placeholder="Delivery Charge" value="{{ $order->delivery_charge }}">
                     </div>
                   </div>
@@ -547,7 +547,7 @@
                       </div>
                       <div class="col-lg-3">
                         <div class="form-group">
-                          <input type="number" class="form-control" name="weight[]"
+                          <input type="number" class="form-control charge" name="weight[]"
                             placeholder="Weight">
                         </div>
                       </div>
@@ -583,6 +583,43 @@
       $(document).on('click', '.remove_more_package', function() {
         let rowIndex = Number($(this).attr('data-row-index'));
         $(`.other_packages_${rowIndex}`).remove();
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const chargeFields = document.querySelectorAll('#shipping_details .charge');
+        const igstSelect = document.getElementById('igst');
+        const totalField = document.getElementById('total');
+        const materialValue = document.getElementById('price');
+        const pricePerKgInput = document.getElementById('price_per_kg');
+
+        function calculateTotal() {
+          // 1️⃣ Add up all numeric fields
+          let subtotal = 0;
+          chargeFields.forEach(el => {
+            subtotal += parseFloat(el.value) || 0; // treat blanks as 0
+          });
+
+          // 2️⃣ Apply IGST percentage
+          const igstRate = parseFloat(igstSelect.value) || 0;
+          const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
+          console.log(igstAmount);
+
+          let totalWeight = 0;
+          document.querySelectorAll('input[name="weight[]"]').forEach(w => {
+            totalWeight += parseFloat(w.value) || 0;
+          });
+
+          const pricePerKg = parseFloat(pricePerKgInput.value) || 0;
+          const materialCost = pricePerKg * totalWeight;
+
+          // 3️⃣ Final total (rounded to 2 decimals)
+          totalField.value = (subtotal + igstAmount + materialCost).toFixed(2);
+        }
+
+        // Recalculate whenever the user types or changes a value
+        chargeFields.forEach(el => el.addEventListener('input', calculateTotal));
+        pricePerKgInput.addEventListener('input', calculateTotal);
+        igstSelect.addEventListener('change', calculateTotal);
       });
     </script>
   @endpush
