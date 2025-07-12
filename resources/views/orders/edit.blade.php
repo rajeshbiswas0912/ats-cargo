@@ -379,6 +379,7 @@
                       <label class="form-label" for="" style="color: black; font-size: 15px;">IGST</label>
                       <select name="igst" id="igst" class="form-control">
                         <option value="">IGST</option>
+                        <option value="0" {{ $order->igst == 0 ? 'selected' : '' }}>0%</option>
                         <option value="5" {{ $order->igst == 5 ? 'selected' : '' }}>5%</option>
                         <option value="12" {{ $order->igst == 12 ? 'selected' : '' }}>12%</option>
                         <option value="18" {{ $order->igst == 18 ? 'selected' : '' }}>18%</option>
@@ -387,9 +388,17 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
+                      <label class="form-label" for="" style="color: black; font-size: 15px;">IGST
+                        Value</label>
+                      <input type="number" class="form-control charge" id="gst_value" name="gst_value"
+                        placeholder="IGST Value" value="{{ $order->gst_value }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
                       <label class="form-label" for="" style="color: black; font-size: 15px;">Total</label>
                       <input type="number" class="form-control" id="total" name="total" placeholder="Total"
-                        value="{{ $order->sub_total }}">
+                        value="{{ $order->sub_total }}" step="any">
                     </div>
                   </div>
                 </div>
@@ -587,7 +596,7 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         const chargeFields = document.querySelectorAll('#shipping_details .charge');
-        const igstSelect = document.getElementById('igst');
+        // const igstSelect = document.getElementById('igst');
         const totalField = document.getElementById('total');
         const materialValue = document.getElementById('price');
         const pricePerKgInput = document.getElementById('price_per_kg');
@@ -600,9 +609,9 @@
           });
 
           // 2️⃣ Apply IGST percentage
-          const igstRate = parseFloat(igstSelect.value) || 0;
-          const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
-          console.log(igstAmount);
+          // const igstRate = parseFloat(igstSelect.value) || 0;
+          // const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
+          // console.log(igstAmount);
 
           let totalWeight = 0;
           document.querySelectorAll('input[name="weight[]"]').forEach(w => {
@@ -613,7 +622,7 @@
           const materialCost = pricePerKg * totalWeight;
 
           // 3️⃣ Final total (rounded to 2 decimals)
-          totalField.value = (subtotal + igstAmount + materialCost).toFixed(2);
+          totalField.value = (subtotal + materialCost).toFixed(2);
         }
 
         // Recalculate whenever the user types or changes a value

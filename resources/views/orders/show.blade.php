@@ -385,6 +385,14 @@
                 </div>
                 <div class="col-lg-3">
                   <div class="form-group">
+                    <label class="form-label" for="" style="color: black; font-size: 15px;">IGST
+                      Value</label>
+                    <input type="number" class="form-control" id="gst_value" name="gst_value"
+                      placeholder="IGST Value" value="{{ $order->gst_value }}" readonly>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
                     <label class="form-label" for="" style="color: black; font-size: 15px;">Total</label>
                     <input type="number" class="form-control" id="total" name="total" placeholder="Total"
                       readonly value="{{ $order->sub_total }}">

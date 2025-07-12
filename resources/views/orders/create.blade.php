@@ -292,6 +292,7 @@
                     <div class="form-group">
                       <select name="igst" id="igst" class="form-control">
                         <option value="">IGST</option>
+                        <option value="0">0%</option>
                         <option value="5">5%</option>
                         <option value="12">12%</option>
                         <option value="18">18%</option>
@@ -300,8 +301,14 @@
                   </div>
                   <div class="col-lg-3">
                     <div class="form-group">
+                      <input type="number" class="form-control charge" id="gst_value" name="gst_value"
+                        placeholder="IGST Value">
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <div class="form-group">
                       <input type="number" class="form-control" id="total" name="total" placeholder="Total"
-                        required>
+                        step="any" required>
                     </div>
                   </div>
                 </div>
@@ -484,7 +491,7 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         const chargeFields = document.querySelectorAll('#shipping_details .charge');
-        const igstSelect = document.getElementById('igst');
+        // const igstSelect = document.getElementById('igst');
         const totalField = document.getElementById('total');
         const materialValue = document.getElementById('price');
         const pricePerKgInput = document.getElementById('price_per_kg');
@@ -497,9 +504,8 @@
           });
 
           // 2️⃣ Apply IGST percentage
-          const igstRate = parseFloat(igstSelect.value) || 0;
-          const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
-          console.log(igstAmount);
+          // const igstRate = parseFloat(igstSelect.value) || 0;
+          // const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
 
           let totalWeight = 0;
           document.querySelectorAll('input[name="weight[]"]').forEach(w => {
@@ -510,7 +516,7 @@
           const materialCost = pricePerKg * totalWeight;
 
           // 3️⃣ Final total (rounded to 2 decimals)
-          totalField.value = (subtotal + igstAmount + materialCost).toFixed(2);
+          totalField.value = (subtotal + materialCost).toFixed(2);
         }
 
         // Recalculate whenever the user types or changes a value

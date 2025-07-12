@@ -13,10 +13,6 @@
       padding: 0;
     }
 
-    body {
-      padding: 10px;
-    }
-
     table,
     td {
       border-collapse: collapse;
@@ -27,7 +23,7 @@
 </head>
 
 <body>
-  <table style="margin: 0 auto; font-family: sans-serif; width: 770px; color: #000; border: 1px solid #000;">
+  <table style="margin: 0 auto; font-family: sans-serif; width: 800px; color: #000; border: 1px solid #000;">
     <tr>
       <td colspan="10" style="height: 10px; width: 100%;">
       </td>
@@ -99,17 +95,17 @@
         <h6 style="font-weight: bold; font-size: 14px;">Messer's </h6>
       </td>
       <td colspan="4">
-        <h4 style="font-weight: bold; font-size: 15px;">{{ $order->pickup_name }}</h4>
+        <h4 style="font-weight: bold; font-size: 15px;">{{ $order->delivery_name }}</h4>
         <ul style="list-style-type: none;padding: 0;">
-          <li style="font-size: 14px; font-weight: bold;">{{ $order->pickup_address }}</li>
+          <li style="font-size: 14px; font-weight: bold;">{{ $order->delivery_address }}</li>
           {{-- <li style="font-size: 14px; font-weight: bold;">GEORGES GATE ROAD, HASTING</li> --}}
-          <li style="font-size: 14px; font-weight: bold;">{{ $order->pickup_city }} - {{ $order->pickup_pincode }}
+          <li style="font-size: 14px; font-weight: bold;">{{ $order->delivery_city }} - {{ $order->delivery_pincode }}
           </li>
         </ul>
       </td>
       <td colspan="4">
         <ul style="list-style-type: none;padding: 0; border: 2px solid #000; padding: 5px;">
-          <li style="font-size: 14px; font-weight: bold;"> GSTIN: {{ $order->pickup_gst }}</li>
+          <li style="font-size: 14px; font-weight: bold;"> GSTIN: {{ $order->delivery_gst }}</li>
           <li style="font-size: 14px; font-weight: bold;"></li>
           <li style="font-size: 14px; font-weight: bold;">STATE CODE: </li>
         </ul>
@@ -192,11 +188,11 @@
     </tr>
 
     <tr>
-      <td style="font-size: 14px;">{{ $order->tracking_no }}</td>
+      <td style="font-size: 14px;">{{ $order->challan_number }}</td>
       <td style="font-size: 14px;">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y') }}</td>
       <td style="font-size: 12px;" colspan="2">
         <ul style="list-style-type: none;padding: 0;">
-          <li>{{ $order->invoice_number }}</li>
+          <li></li>
           <li></li>
         </ul>
       </td>
@@ -222,7 +218,7 @@
       <td colspan="2">
       </td>
       <td colspan="8">
-        {{-- <p style=" font-size: 10px;">**WELFRAC SERVICES**</p> --}}
+        <p style=" font-size: 10px;">**WELFRAC SERVICES**</p>
       </td>
     </tr>
 
@@ -240,24 +236,22 @@
       </td>
       <td colspan="5">
         <ul style="padding: 0; list-style: none;">
-          <li style="font-size: 15px;">1. Shipping Charges. </li>
-          <li style="font-size: 14px;">2. Pickup Charges.</li>
-          <li style="font-size: 14px;">3. Hamali.</li>
-          <li style="font-size: 14px;">4. S/C Charges.</li>
-          <li style="font-size: 14px;">5. ST. Charges.</li>
-          <li style="font-size: 14px;">6. Delivery Charges.</li>
-          <li style="font-size: 14px;">7. IGST {{ '@' . $order->igst }}%.</li>
+          <li style="font-size: 15px;">1. Transportation Charges. </li>
+          <li style="font-size: 14px;">2. Consigment Charges.</li>
+          <li style="font-size: 14px;">3. CGST Charges. @ {{ $order->igst / 2 }}% </li>
+          <li style="font-size: 14px;">4. SGST Charges. @ {{ $order->igst / 2 }}% </li>
+          <li style="font-size: 14px;">5. IGST Charges. @ {{ $order->igst }}% </li>
+          <li style="font-size: 14px;">6. Extra expenses. DETENTION CHARGES/ 4 DAYS </li>
         </ul>
       </td>
       <td colspan="4">
         <ul style="list-style-type: none;padding: 0; text-align: right;">
           <li style="font-weight: bold;  font-size: 14px;"> {{ $order->shipping_charge }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->pickup_charge }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->hamali }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->sc_cost }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->st_charge }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->delivery_charge }}</li>
-          <li style="font-weight: bold;  font-size: 14px;">{{ $order->gst_value }}</li>
+          <li style="font-weight: bold;  font-size: 14px;">0.00</li>
+          <li style="font-weight: bold;  font-size: 14px;">0.00</li>
+          <li style="font-weight: bold;  font-size: 14px;">0.00</li>
+          <li style="font-weight: bold;  font-size: 14px;">0.00</li>
+          <li style="font-weight: bold;  font-size: 14px;">0.00</li>
         </ul>
       </td>
     </tr>
@@ -270,8 +264,8 @@
       <td colspan="1">
       </td>
       <td colspan="9">
-        {{-- <p style="text-align: left; padding-bottom: 5px; font-size: 14px; text-decoration: underline;">GST PAID BY
-          CENOSPHERE INDIA PVT. LIMITED</p> --}}
+        <p style="text-align: left; padding-bottom: 5px; font-size: 14px; text-decoration: underline;">GST PAID BY
+          CENOSPHERE INDIA PVT. LIMITED</p>
       </td>
     </tr>
     <tr>
@@ -322,12 +316,12 @@
       <td colspan="1">
       </td>
       <td colspan="5">
-        {{-- <ul style="list-style-type: none;">
+        <ul style="list-style-type: none;">
           <li>Advance pay : </li>
           <li>
             <h4>Balance DUE: </h4>
           </li>
-        </ul> --}}
+        </ul>
       </td>
       <td colspan="4" style="text-align: center;">
         <img src="data:image/png;base64,{{ $stamp }}" alt="Tax Invoice Stamp">
