@@ -491,7 +491,7 @@
 
       document.addEventListener('DOMContentLoaded', () => {
         const chargeFields = document.querySelectorAll('#shipping_details .charge');
-        // const igstSelect = document.getElementById('igst');
+        const igstSelect = document.getElementById('igst');
         const totalField = document.getElementById('total');
         const materialValue = document.getElementById('price');
         const pricePerKgInput = document.getElementById('price_per_kg');
@@ -503,26 +503,39 @@
             subtotal += parseFloat(el.value) || 0; // treat blanks as 0
           });
 
-          // 2️⃣ Apply IGST percentage
-          // const igstRate = parseFloat(igstSelect.value) || 0;
-          // const igstAmount = parseFloat(materialValue.value) * igstRate / 100;
-
-          let totalWeight = 0;
-          document.querySelectorAll('input[name="weight[]"]').forEach(w => {
-            totalWeight += parseFloat(w.value) || 0;
-          });
-
-          const pricePerKg = parseFloat(pricePerKgInput.value) || 0;
-          const materialCost = pricePerKg * totalWeight;
-
           // 3️⃣ Final total (rounded to 2 decimals)
-          totalField.value = (subtotal + materialCost).toFixed(2);
+          totalField.value = subtotal.toFixed(2);
         }
 
         // Recalculate whenever the user types or changes a value
         chargeFields.forEach(el => el.addEventListener('input', calculateTotal));
-        pricePerKgInput.addEventListener('input', calculateTotal);
-        igstSelect.addEventListener('change', calculateTotal);
+
+        function calculateShipping() {
+          let totalWeight = 0;
+          document.querySelectorAll('input[name="charges_weight[]"]').forEach(w => {
+            totalWeight += parseFloat(w.value) || 0;
+          });
+
+          const pricePerKg = parseFloat(pricePerKgInput.value) || 0;
+          const shippingCharge = totalWeight * pricePerKg;
+
+          document.getElementById('shipping_charge').value = shippingCharge.toFixed(2);
+          claculateIgst();
+          calculateTotal();
+        }
+
+        pricePerKgInput.addEventListener('input', calculateShipping);
+
+        function claculateIgst() {
+          const shippingCharge = parseFloat(document.getElementById('shipping_charge').value) || 0;
+          const igstRate = parseFloat(igstSelect.value) || 0;
+          const igstAmount = parseFloat(shippingCharge) * igstRate / 100;
+
+          document.getElementById('gst_value').value = igstAmount.toFixed(2);
+          calculateTotal();
+        }
+
+        igstSelect.addEventListener('change', claculateIgst);
       });
     </script>
   @endpush
